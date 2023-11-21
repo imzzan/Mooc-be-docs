@@ -13,10 +13,18 @@
       "tags": [
         {
           "name": "Authentication",
-          "description": "Everything about Authentication User",
+          "description": "Everything about Authentication",
           "externalDocs": {
             "description": "Find out more",
-            "url": "http://localhost:3004/auth/"
+            "url": "http://localhost:3004"
+          }
+        },
+        {
+          "name": "User",
+          "description": "Everything about User",
+          "externalDocs": {
+            "description": "Find out more",
+            "url": "http://localhost:3004"
           }
         },
         {
@@ -124,6 +132,26 @@
                           "message": {
                             "type": "string",
                             "default": "User has been registered or Client error"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "401": {
+                  "description": "Password incorrect",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string",
+                            "default": "FAILD"
+                          },
+                          "message": {
+                            "type": "string",
+                            "default": "Password incorrect"
                           }
                         }
                       }
@@ -392,7 +420,7 @@
           },
           "/reset-password/{id}": {
             "put": {
-              "tags": ["Authentication"],
+              "tags": ["User"],
               "summary": "Reset Password",
               "description": "Reset Password",
               "parameters": [
@@ -469,6 +497,26 @@
                     }
                   }
                 },
+                "401": {
+                  "description": "Unauthorized",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string",
+                            "default": "FAILD"
+                          },
+                          "message": {
+                            "type": "string",
+                            "default": "Unauthorized"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
                 "500": {
                   "description": "Error in server side",
                   "content": {
@@ -494,7 +542,7 @@
           },
           "/users/{id}": {
             "put": {
-              "tags": ["Authentication"],
+              "tags": ["User"],
               "summary": "Update Profile",
               "description": "Update Profile",
               "parameters": [
@@ -604,6 +652,25 @@
                           "message": {
                             "type": "string",
                             "default": "User has been registered or Client error"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },                "401": {
+                  "description": "Unauthorized",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string",
+                            "default": "FAILD"
+                          },
+                          "message": {
+                            "type": "string",
+                            "default": "Unauthorized"
                           }
                         }
                       }
@@ -825,6 +892,26 @@
                     }
                   }
                 },
+                "401": {
+                  "description": "Unauthorized",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string",
+                            "default": "FAILD"
+                          },
+                          "message": {
+                            "type": "string",
+                            "default": "Unauthorized"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
                 "403": {
                   "description": "Forbidden Request",
                   "content": {
@@ -958,6 +1045,436 @@
                           "message": {
                             "type": "string",
                             "default": "Unauthorized"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "500": {
+                  "description": "Error in server side",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string",
+                            "default": "FAILD"
+                          },
+                          "message": {
+                            "type": "string",
+                            "default": "Server Error"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "/class/{id}": {
+            "get": {
+              "tags": ["Class"],
+              "summary": "Detail Class",
+              "description": "Detail Class",
+              "parameters": [
+                {
+                  "name": "id",
+                  "in": "path",
+                  "required": true,
+                  "schema": {
+                    "type": "string",
+                    "format": "uuidv4"
+                  }
+                }
+              ],
+              "responses": {
+                "201": {
+                  "description": "Get Class Successfully",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string",
+                            "default": "OK"
+                          },
+                          "message": {
+                            "type": "string",
+                            "default": "Success"
+                          },
+                          "data": {
+                            "type": "object",
+                            "properties": {
+                              "name_kelas": {
+                                "type": "string"
+                              },
+                              "kategori": {
+                                "type": "string"
+                              },
+                              "kode_kelas": {
+                                "type": "string"
+                              },
+                              "type_kelas": {
+                                "type": "string"
+                              },
+                              "level": {
+                                "type": "string"
+                              },
+                              "harga": {
+                                "type": "string"
+                              },
+                              "materi": {
+                                "type": "string"
+                              },
+                              "video": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "400": {
+                  "description": "Error in client side",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string",
+                            "default": "FAILD"
+                          },
+                          "message": {
+                            "type": "string",
+                            "default": "Client error"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "401": {
+                  "description": "Unauthorized",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string",
+                            "default": "FAILD"
+                          },
+                          "message": {
+                            "type": "string",
+                            "default": "Unauthorized"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "500": {
+                  "description": "Error in server side",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string",
+                            "default": "FAILD"
+                          },
+                          "message": {
+                            "type": "string",
+                            "default": "Server Error"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "put": {
+              "tags": ["Class"],
+              "summary": "Update Class",
+              "description": "Update Class",
+              "parameters": [
+                {
+                  "name": "id",
+                  "in": "path",
+                  "required": true,
+                  "schema": {
+                    "type": "string",
+                    "format": "uuidv4"
+                  }
+                }
+              ],
+              "requestBody": {
+                "required": true,
+                "content": {
+                  "application/json": {
+                    "schema": {
+                      "type": "object",
+                      "properties": {
+                        "name_kelas": {
+                          "type": "string"
+                        },
+                        "kategori": {
+                          "type": "string"
+                        },
+                        "kode_kelas": {
+                          "type": "string"
+                        },
+                        "type_kelas": {
+                          "type": "string"
+                        },
+                        "level": {
+                          "type": "string"
+                        },
+                        "harga": {
+                          "type": "string"
+                        },
+                        "materi": {
+                          "type": "string"
+                        },
+                        "video": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "responses": {
+                "201": {
+                  "description": "Class successfully updated",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string",
+                            "default": "OK"
+                          },
+                          "message": {
+                            "type": "string",
+                            "default": "Success"
+                          },
+                          "data": {
+                            "type": "object",
+                            "properties": {
+                              "name_kelas": {
+                                "type": "string"
+                              },
+                              "kategori": {
+                                "type": "string"
+                              },
+                              "kode_kelas": {
+                                "type": "string"
+                              },
+                              "type_kelas": {
+                                "type": "string"
+                              },
+                              "level": {
+                                "type": "string"
+                              },
+                              "harga": {
+                                "type": "string"
+                              },
+                              "materi": {
+                                "type": "string"
+                              },
+                              "video": {
+                                "type": "string"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "400": {
+                  "description": "Error in client side",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string",
+                            "default": "FAILD"
+                          },
+                          "message": {
+                            "type": "string",
+                            "default": "Client error"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "401": {
+                  "description": "Unauthorized",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string",
+                            "default": "FAILD"
+                          },
+                          "message": {
+                            "type": "string",
+                            "default": "Unauthorized"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "403": {
+                  "description": "Forbidden Request",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string",
+                            "default": "FAILD"
+                          },
+                          "message": {
+                            "type": "string",
+                            "default": "Forbidden"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "500": {
+                  "description": "Error in server side",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string",
+                            "default": "FAILD"
+                          },
+                          "message": {
+                            "type": "string",
+                            "default": "Server Error"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "delete": {
+              "tags": ["Class"],
+              "summary": "Delete Class",
+              "description": "Delete Class",
+              "parameters": [
+                {
+                  "name": "id",
+                  "in": "path",
+                  "required": true,
+                  "schema": {
+                    "type": "string",
+                    "format": "uuidv4"
+                  }
+                }
+              ],
+              "responses": {
+                "201": {
+                  "description": "Class deleted",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string",
+                            "default": "OK"
+                          },
+                          "message": {
+                            "type": "string",
+                            "default": "Success delete class"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "400": {
+                  "description": "Error in client side",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string",
+                            "default": "FAILD"
+                          },
+                          "message": {
+                            "type": "string",
+                            "default": "Client error"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "401": {
+                  "description": "Unauthorized",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string",
+                            "default": "FAILD"
+                          },
+                          "message": {
+                            "type": "string",
+                            "default": "Unauthorized"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "403": {
+                  "description": "Forbidden Request",
+                  "content": {
+                    "application/json": {
+                      "schema": {
+                        "type": "object",
+                        "properties": {
+                          "status": {
+                            "type": "string",
+                            "default": "FAILD"
+                          },
+                          "message": {
+                            "type": "string",
+                            "default": "Forbidden"
                           }
                         }
                       }
