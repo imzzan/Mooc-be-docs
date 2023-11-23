@@ -778,25 +778,25 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "nama_kelas": {
+                  "class_name": {
                     "type": "string"
                   },
-                  "kategori": {
+                  "category": {
                     "type": "string"
                   },
-                  "kode_kelas": {
+                  "code_class": {
                     "type": "string"
                   },
-                  "tipe_kelas": {
+                  "type_class": {
                     "type": "string"
                   },
                   "level": {
                     "type": "string"
                   },
-                  "harga": {
+                  "price": {
                     "type": "string"
                   },
-                  "materi": {
+                  "module": {
                     "type": "string"
                   },
                   "video": {
@@ -826,25 +826,25 @@
                     "data": {
                       "type": "object",
                       "properties": {
-                        "nama_kelas": {
+                        "class_name": {
                           "type": "string"
                         },
-                        "kategori": {
+                        "category": {
                           "type": "string"
                         },
-                        "kode_kelas": {
+                        "code_class": {
                           "type": "string"
                         },
-                        "tipe_kelas": {
+                        "type_class": {
                           "type": "string"
                         },
                         "level": {
                           "type": "string"
                         },
-                        "harga": {
+                        "price": {
                           "type": "string"
                         },
-                        "materi": {
+                        "module": {
                           "type": "string"
                         },
                         "video": {
@@ -964,25 +964,25 @@
                       "items": {
                         "type": "object",
                         "properties": {
-                          "nama_kelas": {
+                          "class_name": {
                             "type": "string"
                           },
-                          "kategori": {
+                          "category": {
                             "type": "string"
                           },
-                          "kode_kelas": {
+                          "code_class": {
                             "type": "string"
                           },
-                          "tipe_kelas": {
+                          "type_class": {
                             "type": "string"
                           },
                           "level": {
                             "type": "string"
                           },
-                          "harga": {
+                          "price": {
                             "type": "string"
                           },
-                          "materi": {
+                          "module": {
                             "type": "string"
                           },
                           "video": {
@@ -1094,25 +1094,25 @@
                     "data": {
                       "type": "object",
                       "properties": {
-                        "nama_kelas": {
+                        "class_name": {
                           "type": "string"
                         },
-                        "kategori": {
+                        "category": {
                           "type": "string"
                         },
-                        "kode_kelas": {
+                        "code_class": {
                           "type": "string"
                         },
-                        "tipe_kelas": {
+                        "type_class": {
                           "type": "string"
                         },
                         "level": {
                           "type": "string"
                         },
-                        "harga": {
+                        "price": {
                           "type": "string"
                         },
-                        "materi": {
+                        "module": {
                           "type": "string"
                         },
                         "video": {
@@ -1209,25 +1209,25 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "nama_kelas": {
+                  "class_name": {
                     "type": "string"
                   },
-                  "kategori": {
+                  "category": {
                     "type": "string"
                   },
-                  "kode_kelas": {
+                  "code_class": {
                     "type": "string"
                   },
-                  "tipe_kelas": {
+                  "type_class": {
                     "type": "string"
                   },
                   "level": {
                     "type": "string"
                   },
-                  "harga": {
+                  "price": {
                     "type": "string"
                   },
-                  "materi": {
+                  "module": {
                     "type": "string"
                   },
                   "video": {
@@ -1257,25 +1257,25 @@
                     "data": {
                       "type": "object",
                       "properties": {
-                        "nama_kelas": {
+                        "class_name": {
                           "type": "string"
                         },
-                        "kategori": {
+                        "category": {
                           "type": "string"
                         },
-                        "kode_kelas": {
+                        "code_class": {
                           "type": "string"
                         },
-                        "tipe_kelas": {
+                        "type_class": {
                           "type": "string"
                         },
                         "level": {
                           "type": "string"
                         },
-                        "harga": {
+                        "price": {
                           "type": "string"
                         },
-                        "materi": {
+                        "module": {
                           "type": "string"
                         },
                         "video": {
@@ -1556,19 +1556,19 @@
       "Class": {
         "type": "object",
         "properties": {
-          "kode_kelas": {
+          "code_class": {
             "type": "string",
             "example": "X72s9"
           },
-          "nama_kelas": {
+          "class_name": {
             "type": "string",
             "example": "Fullstackweb"
           },
-          "kategori": {
+          "category": {
             "type": "string",
             "example": "Fullstackweb"
           },
-          "tipe_kelas": {
+          "type_class": {
             "type": "string",
             "example": "premium"
           },
@@ -1576,11 +1576,11 @@
             "type": "string",
             "example": "advanced"
           },
-          "harga": {
+          "price": {
             "type": "number",
             "example": 12000
           },
-          "materi": {
+          "module": {
             "type": "string",
             "example": "Fullstackweb"
           },
