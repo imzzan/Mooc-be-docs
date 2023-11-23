@@ -49,7 +49,7 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "nama": {
+                  "name": {
                     "type": "string"
                   },
                   "email": {
@@ -59,7 +59,7 @@
                   "password": {
                     "type": "string"
                   },
-                  "no_tel": {
+                  "no_telp": {
                     "type": "string"
                   }
                 }
@@ -82,7 +82,7 @@
                     "data": {
                       "type": "object",
                       "properties": {
-                        "nama": {
+                        "name": {
                           "type": "string"
                         },
                         "email": {
@@ -92,18 +92,18 @@
                         "password": {
                           "type": "string"
                         },
-                        "no_tel": {
+                        "no_telp": {
                           "type": "string"
                         },
                         "role": {
                           "type": "string",
                           "default": "member"
                         },
-                        "negara": {
+                        "country": {
                           "type": "string",
                           "default": null
                         },
-                        "kota": {
+                        "city": {
                           "type": "string",
                           "default": null
                         },
@@ -232,7 +232,7 @@
                         "password": {
                           "type": "string"
                         },
-                        "no_tel": {
+                        "no_telp": {
                           "type": "string"
                         },
                         "role": {
@@ -340,7 +340,7 @@
                         "id": {
                           "type": "string"
                         },
-                        "nama": {
+                        "name": {
                           "type": "string"
                         },
                         "email": {
@@ -349,13 +349,13 @@
                         "password": {
                           "type": "string"
                         },
-                        "no_tel": {
+                        "no_telp": {
                           "type": "string"
                         },
-                        "negara": {
+                        "country": {
                           "type": "string"
                         },
-                        "kota": {
+                        "city": {
                           "type": "string"
                         },
                         "photo": {
@@ -436,11 +436,11 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "password_lama": {
+                  "old_password": {
                     "type": "string",
                     "uniqueItems": true
                   },
-                  "password_baru": {
+                  "new_password": {
                     "type": "string"
                   },
                   "confirm_password": {
@@ -547,7 +547,7 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "nama": {
+                  "name": {
                     "type": "string"
                   },
                   "email": {
@@ -557,13 +557,13 @@
                   "password": {
                     "type": "string"
                   },
-                  "no_tel": {
+                  "no_telp": {
                     "type": "string"
                   },
-                  "negara": {
+                  "country": {
                     "type": "string"
                   },
-                  "kota": {
+                  "city": {
                     "type": "string"
                   },
                   "photo": {
@@ -589,7 +589,7 @@
                     "data": {
                       "type": "object",
                       "properties": {
-                        "nama": {
+                        "name": {
                           "type": "string"
                         },
                         "email": {
@@ -599,17 +599,17 @@
                         "password": {
                           "type": "string"
                         },
-                        "no_tel": {
+                        "no_telp": {
                           "type": "string"
                         },
                         "role": {
                           "type": "string",
                           "default": "member"
                         },
-                        "negara": {
+                        "country": {
                           "type": "string"
                         },
-                        "kota": {
+                        "city": {
                           "type": "string"
                         },
                         "photo": {
@@ -1511,11 +1511,11 @@
             "type": "string",
             "example": "john123"
           },
-          "negara": {
+          "country": {
             "type": "string",
             "example": "Indonesia"
           },
-          "kota": {
+          "city": {
             "type": "string",
             "example": "Saranjana"
           },
