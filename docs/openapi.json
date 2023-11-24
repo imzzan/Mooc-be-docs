@@ -1,0 +1,2089 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Dev Academy",
+    "description": "Dev Academy adalah sebuah platform belajar online yang menyediakankursus online dalam bidang teknologi\n\ncontact:\n  - devacademy@gmail.com",
+    "version": "1.0"
+  },
+  "servers": [
+    {
+      "url": "http://127.0.0.1:3000"
+    },
+    {
+      "url": "http://127.0.0.1:3000"
+    }
+  ],
+  "externalDocs": {
+    "description": "Find out more about Swagger",
+    "url": "http://swagger.io"
+  },
+  "tags": [
+    {
+      "name": "Authentication",
+      "description": "End point about Authentication"
+    },
+    {
+      "name": "User",
+      "description": "End point about User management"
+    },
+    {
+      "name": "Course",
+      "description": "End point about Course management"
+    },
+    {
+      "name": "Module",
+      "description": "End point about Module management"
+    },
+    {
+      "name": "Order",
+      "description": "End Point about Order management"
+    }
+  ],
+  "paths": {
+    "/api/regsiter": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Regsiter User",
+        "description": "With this endpoint you can register with role member",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string",
+                    "uniqueItems": true
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "no_telp": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User successfully registered",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "User successfully registered"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "accessToken": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in client side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "User has been registered or Client error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Password incorrect",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Password incorrect"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in server side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Server Error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/login": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Only admin could login in this enpoint",
+        "description": "All User could login in this enpoint",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "uniqueItems": true
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User successfully login",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "User login successfully"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "accessToken": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error in client side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Email user not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in Ssrver",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Server Error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/login": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "All User could login in this enpoint",
+        "description": "All User could login in this enpoint",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "uniqueItems": true
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "User successfully login",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "User successfully login"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "accessToken": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Error in client side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Email user not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in Ssrver",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Server Error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/user": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Get user Profile",
+        "description": "Get User Profile by jwt",
+        "responses": {
+          "201": {
+            "description": "User successfully Updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "User successfully Updated"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "email": {
+                          "type": "string",
+                          "uniqueItems": true
+                        },
+                        "password": {
+                          "type": "string"
+                        },
+                        "no_telp": {
+                          "type": "string"
+                        },
+                        "role": {
+                          "type": "string",
+                          "default": "member"
+                        },
+                        "country": {
+                          "type": "string"
+                        },
+                        "city": {
+                          "type": "string"
+                        },
+                        "photo": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in client side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "User has been registered or Client error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in server side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Server Error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer_auth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Update Profile",
+        "description": "Update Profile user by jwt",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string",
+                    "uniqueItems": true
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "no_telp": {
+                    "type": "string"
+                  },
+                  "country": {
+                    "type": "string"
+                  },
+                  "city": {
+                    "type": "string"
+                  },
+                  "photo": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User successfully Updated",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "User successfully Updated"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "name": {
+                          "type": "string"
+                        },
+                        "email": {
+                          "type": "string",
+                          "uniqueItems": true
+                        },
+                        "password": {
+                          "type": "string"
+                        },
+                        "no_telp": {
+                          "type": "string"
+                        },
+                        "role": {
+                          "type": "string",
+                          "default": "member"
+                        },
+                        "country": {
+                          "type": "string"
+                        },
+                        "city": {
+                          "type": "string"
+                        },
+                        "photo": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in client side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "User has been registered or Client error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in server side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Server Error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer_auth": []
+          }
+        ]
+      }
+    },
+    "/api/user/password": {
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Reset Password",
+        "description": "Reset Password",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "old_password": {
+                    "type": "string",
+                    "uniqueItems": true
+                  },
+                  "new_password": {
+                    "type": "string"
+                  },
+                  "confirm_password": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "User Successfully changed password",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Password successfully changed"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in client side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAILD"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Client Error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAILD"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in server side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAILD"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Server Error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer_auth": []
+          }
+        ]
+      }
+    },
+    "/api/course/user": {
+      "get": {
+        "tags": [
+          "Course"
+        ],
+        "summary": "Get course by user",
+        "description": "Get all Course by user and their progress",
+        "responses": {
+          "200": {
+            "description": "Get all course successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Get all available course success"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "class_name": {
+                            "type": "string"
+                          },
+                          "category": {
+                            "type": "string"
+                          },
+                          "code_class": {
+                            "type": "string"
+                          },
+                          "type_class": {
+                            "type": "string"
+                          },
+                          "level": {
+                            "type": "string"
+                          },
+                          "price": {
+                            "type": "string"
+                          },
+                          "module": {
+                            "type": "string"
+                          },
+                          "video": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in client side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Client error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Forbidden"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in server side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Server Error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer_auth": []
+          }
+        ]
+      }
+    },
+    "/api/course": {
+      "post": {
+        "tags": [
+          "Course"
+        ],
+        "summary": "Create a new course",
+        "description": "Create a new course",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "class_name": {
+                    "type": "string"
+                  },
+                  "category": {
+                    "type": "string"
+                  },
+                  "code_class": {
+                    "type": "string"
+                  },
+                  "type_class": {
+                    "type": "string"
+                  },
+                  "level": {
+                    "type": "string"
+                  },
+                  "price": {
+                    "type": "string"
+                  },
+                  "module": {
+                    "type": "string"
+                  },
+                  "video": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created new course success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "New course successfully created"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "class_name": {
+                          "type": "string"
+                        },
+                        "category": {
+                          "type": "string"
+                        },
+                        "code_class": {
+                          "type": "string"
+                        },
+                        "type_class": {
+                          "type": "string"
+                        },
+                        "level": {
+                          "type": "string"
+                        },
+                        "price": {
+                          "type": "string"
+                        },
+                        "module": {
+                          "type": "string"
+                        },
+                        "video": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in client side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Client error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Forbidden"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in server side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Server Error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer_auth": []
+          }
+        ]
+      },
+      "get": {
+        "tags": [
+          "Course"
+        ],
+        "summary": "Get all course",
+        "description": "Get all course available",
+        "responses": {
+          "201": {
+            "description": "Get all course successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Get all available course success"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "class_name": {
+                            "type": "string"
+                          },
+                          "category": {
+                            "type": "string"
+                          },
+                          "code_class": {
+                            "type": "string"
+                          },
+                          "type_class": {
+                            "type": "string"
+                          },
+                          "level": {
+                            "type": "string"
+                          },
+                          "price": {
+                            "type": "string"
+                          },
+                          "module": {
+                            "type": "string"
+                          },
+                          "video": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in client side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Client error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Forbidden"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in server side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Server Error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer_auth": []
+          }
+        ]
+      }
+    },
+    "/api/course/{id}": {
+      "get": {
+        "tags": [
+          "Course"
+        ],
+        "summary": "Detail Course",
+        "description": "Get Course by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuidv4"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Get Course by id success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Get course by id success"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "class_name": {
+                          "type": "string"
+                        },
+                        "category": {
+                          "type": "string"
+                        },
+                        "code_class": {
+                          "type": "string"
+                        },
+                        "type_class": {
+                          "type": "string"
+                        },
+                        "level": {
+                          "type": "string"
+                        },
+                        "price": {
+                          "type": "string"
+                        },
+                        "module": {
+                          "type": "string"
+                        },
+                        "video": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in client side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Client error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Forbidden"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in server side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Server Error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer_auth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "Course"
+        ],
+        "summary": "Update Course",
+        "description": "Updating Course by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuidv4"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "class_name": {
+                    "type": "string"
+                  },
+                  "category": {
+                    "type": "string"
+                  },
+                  "code_class": {
+                    "type": "string"
+                  },
+                  "type_class": {
+                    "type": "string"
+                  },
+                  "level": {
+                    "type": "string"
+                  },
+                  "price": {
+                    "type": "string"
+                  },
+                  "module": {
+                    "type": "string"
+                  },
+                  "video": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "success updating course",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Course Successfully updated"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "class_name": {
+                          "type": "string"
+                        },
+                        "category": {
+                          "type": "string"
+                        },
+                        "code_class": {
+                          "type": "string"
+                        },
+                        "type_class": {
+                          "type": "string"
+                        },
+                        "level": {
+                          "type": "string"
+                        },
+                        "price": {
+                          "type": "string"
+                        },
+                        "module": {
+                          "type": "string"
+                        },
+                        "video": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in client side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Client error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Forbidden"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in server side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Server Error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer_auth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Course"
+        ],
+        "summary": "Delete Course",
+        "description": "Delete Course",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuidv4"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Course deleting success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Course successfully deleted"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in client side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Client error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Forbidden"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in server side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Server Error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer_auth": []
+          }
+        ]
+      }
+    },
+    "/api/categories": {
+      "get": {
+        "tags": [
+          "Course"
+        ],
+        "summary": "Get all categories",
+        "description": "Get all categories",
+        "responses": {
+          "200": {
+            "description": "Getting all categories success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Get categories data success"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "format": "uuid"
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "category 1"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer_auth": []
+          }
+        ]
+      }
+    },
+    "/api/modules": {
+      "get": {
+        "tags": [
+          "Module"
+        ],
+        "summary": "Get all Module",
+        "description": "Get all available module",
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "OK"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer_auth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Module"
+        ],
+        "summary": "Create new module",
+        "description": "Creating new module",
+        "responses": {
+          "201": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "OK"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer_auth": []
+          }
+        ]
+      }
+    },
+    "/api/modules/{class_id}": {
+      "get": {
+        "tags": [
+          "Module"
+        ],
+        "summary": "Get all by class id",
+        "description": "Get all by class id",
+        "parameters": [
+          {
+            "name": "class_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuidv4"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "OK"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer_auth": []
+          }
+        ]
+      }
+    },
+    "/api/orders": {
+      "get": {
+        "tags": [
+          "Order"
+        ],
+        "summary": "Get all order",
+        "description": "Get all order from user",
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "OK"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer_auth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Order"
+        ],
+        "summary": "Create order for course",
+        "description": "Creating order to buying premium course",
+        "responses": {
+          "201": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "OK"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer_auth": []
+          }
+        ]
+      }
+    },
+    "/api/orders/{user_id}": {
+      "get": {
+        "tags": [
+          "Order"
+        ],
+        "summary": "Get all by user id",
+        "description": "Get all by order id",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuidv4"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "OK"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer_auth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "User": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "393330fd-6048-4841-812c-284d34bffe6f"
+          },
+          "name": {
+            "type": "string",
+            "example": "John Smith"
+          },
+          "email": {
+            "type": "string",
+            "example": "john@smith.com"
+          },
+          "password": {
+            "type": "string",
+            "example": "john123"
+          },
+          "country": {
+            "type": "string",
+            "example": "Indonesia"
+          },
+          "city": {
+            "type": "string",
+            "example": "Saranjana"
+          },
+          "image_profile": {
+            "type": "string",
+            "example": "link_image"
+          },
+          "role": {
+            "type": "string",
+            "default": "member",
+            "example": "member"
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "updatedAt": {
+            "type": "string"
+          }
+        }
+      },
+      "OTP": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 1
+          },
+          "userId": {
+            "type": "string",
+            "example": "393330fd-6048-4841-812c-284d34bffe6f"
+          },
+          "kode_otp": {
+            "type": "number",
+            "example": 2453784
+          }
+        }
+      },
+      "Class": {
+        "type": "object",
+        "properties": {
+          "code_class": {
+            "type": "string",
+            "example": "X72s9"
+          },
+          "class_name": {
+            "type": "string",
+            "example": "Fullstackweb"
+          },
+          "category": {
+            "type": "string",
+            "example": "Fullstackweb"
+          },
+          "type_class": {
+            "type": "string",
+            "example": "premium"
+          },
+          "level": {
+            "type": "string",
+            "example": "advanced"
+          },
+          "price": {
+            "type": "number",
+            "example": 12000
+          },
+          "module": {
+            "type": "string",
+            "example": "Fullstackweb"
+          },
+          "video": {
+            "type": "string",
+            "example": "link_youtube"
+          }
+        }
+      },
+      "Modul": {
+        "type": "object",
+        "properties": {}
+      }
+    },
+    "securitySchemes": {
+      "bearer_auth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
