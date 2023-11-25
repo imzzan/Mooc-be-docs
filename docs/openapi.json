@@ -506,9 +506,6 @@
                     "type": "string",
                     "uniqueItems": true
                   },
-                  "password": {
-                    "type": "string"
-                  },
                   "no_telp": {
                     "type": "string"
                   },
