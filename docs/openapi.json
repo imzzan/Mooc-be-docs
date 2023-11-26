@@ -770,18 +770,6 @@
         "tags": [
           "OTP"
         ],
-        "parameters": [
-          {
-            "name": "authentication",
-            "description": "an authorization header",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default" : "Bearer ${accessToken}"
-            }
-          }
-        ],
         "summary": "Send code otp for Verification",
         "description": "Send code otp for Verification",
         "responses": {
@@ -895,18 +883,6 @@
       "post": {
         "tags": [
           "OTP"
-        ],
-        "parameters": [
-          {
-            "name": "authentication",
-            "description": "an authorization header",
-            "in": "header",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "default" : "Bearer ${accessToken}"
-            }
-          }
         ],
         "summary": "Confirm code OTP",
         "description": "Confirm code OTP",
