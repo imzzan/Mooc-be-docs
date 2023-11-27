@@ -918,7 +918,24 @@
         },
         "responses": {
           "200": {
-            "description": "Resopnse will redirect to endpoint home"
+            "description": "Sucess confirm otp",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Success"
+                    }
+                  }
+                }
+              }
+            }
           },
           "400": {
             "description": "Error in client side",
