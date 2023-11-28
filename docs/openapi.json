@@ -835,8 +835,8 @@
         "tags": [
           "User"
         ],
-        "summary": "Reset Password",
-        "description": "Reset Password",
+        "summary": "Update Passwords",
+        "description": "Update Password",
         "requestBody": {
           "required": true,
           "content": {
