@@ -32,6 +32,10 @@
       "description": "End point about Course management"
     },
     {
+      "name": "Chapter",
+      "description": "End point about Chapter management"
+    },
+    {
       "name": "Module",
       "description": "End point about Module management"
     },
@@ -1083,10 +1087,6 @@
                                 "type": "string",
                                 "example": "Harris s v"
                               },
-                              "rate": {
-                                "type": "number",
-                                "example": 4.9
-                              },
                               "total_modul": {
                                 "type": "number",
                                 "example": 10
@@ -1197,7 +1197,7 @@
         ]
       }
     },
-    "/api/course": {
+    "/api/admin/course": {
       "post": {
         "tags": [
           "Course"
@@ -1209,7 +1209,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Course_Input"
+                "$ref": "#/components/schemas/Course-Input"
               }
             }
           }
@@ -1324,7 +1324,9 @@
             "bearer_auth": []
           }
         ]
-      },
+      }
+    },
+    "/api/course": {
       "get": {
         "tags": [
           "Course"
@@ -1332,7 +1334,7 @@
         "summary": "Get all course",
         "description": "Get all course available with simplified information",
         "responses": {
-          "201": {
+          "200": {
             "description": "Get all course successfully",
             "content": {
               "application/json": {
@@ -1348,7 +1350,7 @@
                       "default": "Get all courses success"
                     },
                     "data": {
-                      "$ref": "#/components/schemas/Course_Card"
+                      "$ref": "#/components/schemas/Course-Card"
                     }
                   }
                 }
@@ -1375,46 +1377,6 @@
               }
             }
           },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "FAIL"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Unauthorized"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "FAIL"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Forbidden"
-                    }
-                  }
-                }
-              }
-            }
-          },
           "500": {
             "description": "Error in server side",
             "content": {
@@ -1435,12 +1397,7 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "bearer_auth": []
-          }
-        ]
+        }
       }
     },
     "/api/courses/{id}": {
@@ -1478,7 +1435,7 @@
                       "default": "Get course by id success"
                     },
                     "data": {
-                      "$ref": "#/components/schemas/Course_Details"
+                      "$ref": "#/components/schemas/Course-Details"
                     }
                   }
                 }
@@ -1505,46 +1462,6 @@
               }
             }
           },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "FAIL"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Unauthorized"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "FAIL"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Forbidden"
-                    }
-                  }
-                }
-              }
-            }
-          },
           "500": {
             "description": "Error in server side",
             "content": {
@@ -1565,13 +1482,10 @@
               }
             }
           }
-        },
-        "security": [
-          {
-            "bearer_auth": []
-          }
-        ]
-      },
+        }
+      }
+    },
+    "/api/admin/courses/{id}": {
       "put": {
         "tags": [
           "Course"
@@ -1594,7 +1508,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Course_Input"
+                "$ref": "#/components/schemas/Course-Input"
               }
             }
           }
@@ -1728,7 +1642,7 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "Course deleting success",
             "content": {
               "application/json": {
@@ -1862,22 +1776,385 @@
                     "data": {
                       "type": "array",
                       "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string",
-                            "format": "uuid"
-                          },
-                          "category": {
-                            "type": "string",
-                            "example": "Web Development"
-                          },
-                          "image": {
-                            "type": "string",
-                            "example": "https://urlis.net/image_category"
-                          }
-                        }
+                        "$ref": "#/components/schemas/Category"
                       }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in client side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Client error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in server side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Server Error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/chapters": {
+      "get": {
+        "tags": [
+          "Chapter"
+        ],
+        "summary": "Get all Chapter",
+        "description": "Get all available chapter, if there is query params which is course id, return chapter that belongs to that course",
+        "parameters": [
+          {
+            "name": "course_id",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "Id of course to return certain chapter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Get chapter by course id success"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Chapter-Details"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in client side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Client error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in server side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Server Error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/admin/chapters": {
+      "get": {
+        "tags": [
+          "Chapter"
+        ],
+        "summary": "Get all Chapter",
+        "description": "Get all available chapter, if there is query params which is course id, return chapter that belongs to that course",
+        "parameters": [
+          {
+            "name": "course_id",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "Id of course to return certain chapter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Get chapter by course id success"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Chapter-Details"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in client side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Client error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Forbidden"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in server side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Server Error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer_auth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "Chapter"
+        ],
+        "summary": "Create new Chapter",
+        "description": "Creating new Chapter",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Chapter-Input"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Create new module success"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Chapter"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in client side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Client error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Forbidden"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in server side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Server Error"
                     }
                   }
                 }
@@ -1892,13 +2169,289 @@
         ]
       }
     },
-    "/api/modules": {
+    "/api/admin/chapters/{chapter_id}": {
+      "put": {
+        "tags": [
+          "Chapter"
+        ],
+        "summary": "Update Chpater",
+        "description": "Update Chapter by their id",
+        "parameters": [
+          {
+            "name": "chapter_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Chapter-Input"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Create new module success"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Chapter"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in client side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Client error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Forbidden"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in server side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Server Error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer_auth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Chapter"
+        ],
+        "summary": "Delete Chapter",
+        "description": "Deleting Chapter by their id",
+        "parameters": [
+          {
+            "name": "chapter_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Chpater successfully deleted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Chapter successfully deleted"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in client side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Client error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Forbidden"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in server side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Server Error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer_auth": []
+          }
+        ]
+      }
+    },
+    "/api/admin/modules": {
       "get": {
         "tags": [
           "Module"
         ],
         "summary": "Get all Module",
         "description": "Get all available module",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "chapter_id",
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            },
+            "description": "Id of chapter to return certain module"
+          }
+        ],
         "responses": {
           "200": {
             "description": "ok",
@@ -1910,6 +2463,120 @@
                     "status": {
                       "type": "string",
                       "default": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Get all available modules success"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "format": "uuid",
+                            "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
+                          },
+                          "chpater_id": {
+                            "type": "string",
+                            "format": "uuid",
+                            "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "programming introduction"
+                          },
+                          "video": {
+                            "type": "string",
+                            "example": "https://www.youtube.com/watch?v=xvFZjo5PgG0"
+                          },
+                          "duration": {
+                            "type": "number",
+                            "example": 10
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in client side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Client error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Forbidden"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in server side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Server Error"
                     }
                   }
                 }
@@ -1929,6 +2596,16 @@
         ],
         "summary": "Create new module",
         "description": "Creating new module",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Module-Input"
+              }
+            }
+          }
+        },
         "responses": {
           "201": {
             "description": "ok",
@@ -1940,6 +2617,93 @@
                     "status": {
                       "type": "string",
                       "default": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Module successfully updated"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Module"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in client side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Client error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Forbidden"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in server side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Server Error"
                     }
                   }
                 }
@@ -1954,26 +2718,36 @@
         ]
       }
     },
-    "/api/modules/{class_id}": {
-      "get": {
+    "/api/admin/modules/{module_id}": {
+      "put": {
         "tags": [
           "Module"
         ],
-        "summary": "Get all by class id",
-        "description": "Get all by class id",
+        "summary": "Update module",
+        "description": "Update module by their id",
         "parameters": [
           {
-            "name": "class_id",
+            "name": "module_id",
             "in": "path",
             "required": true,
             "schema": {
               "type": "string",
-              "format": "uuidv4"
+              "format": "uuid"
             }
           }
         ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Module-Input"
+              }
+            }
+          }
+        },
         "responses": {
-          "200": {
+          "201": {
             "description": "ok",
             "content": {
               "application/json": {
@@ -1983,6 +2757,218 @@
                     "status": {
                       "type": "string",
                       "default": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Module successfully updated"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Module"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in client side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Client error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Forbidden"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in server side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Server Error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer_auth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "Module"
+        ],
+        "summary": "Delete Module",
+        "description": "Deleting Module by their id",
+        "parameters": [
+          {
+            "name": "module_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Module deleting success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Module successfully deleted"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in client side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Client error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Forbidden"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in server side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Server Error"
                     }
                   }
                 }
@@ -2073,7 +3059,7 @@
             "required": true,
             "schema": {
               "type": "string",
-              "format": "uuidv4"
+              "format": "uuid"
             }
           }
         ],
@@ -2120,6 +3106,10 @@
             "type": "string",
             "example": "john@smith.com"
           },
+          "phone_number": {
+            "type": "string",
+            "example": 85085085085
+          },
           "password": {
             "type": "string",
             "example": "john123"
@@ -2132,7 +3122,7 @@
             "type": "string",
             "example": "Saranjana"
           },
-          "image_profile": {
+          "photo": {
             "type": "string",
             "example": "link_image"
           },
@@ -2164,7 +3154,7 @@
             "type": "string",
             "example": "393330fd-6048-4841-812c-284d34bffe6f"
           },
-          "kode_otp": {
+          "code": {
             "type": "number",
             "example": 2453784
           },
@@ -2217,10 +3207,6 @@
             "type": "string",
             "example": "Harris s v"
           },
-          "rate": {
-            "type": "number",
-            "example": 4.9
-          },
           "price": {
             "type": "number",
             "example": 7999999
@@ -2230,10 +3216,6 @@
             "example": "premium"
           },
           "description": {
-            "type": "string",
-            "example": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"
-          },
-          "target_audience": {
             "type": "string",
             "example": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"
           },
@@ -2261,7 +3243,96 @@
           }
         }
       },
-      "Course_Input": {
+      "Category": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
+          },
+          "category": {
+            "type": "string",
+            "example": "Web Development"
+          },
+          "image": {
+            "type": "string",
+            "example": "https://urlis.net/image_category"
+          }
+        }
+      },
+      "Chapter": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
+          },
+          "course_id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
+          },
+          "name": {
+            "type": "string",
+            "format": "uuid",
+            "example": "introduction"
+          },
+          "is_premium": {
+            "type": "boolean",
+            "example": false
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "datetime",
+            "example": "2023-11-24T17:07:16.802Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "datetime",
+            "example": "2023-11-24T17:07:16.802Z"
+          }
+        }
+      },
+      "Module": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
+          },
+          "chpater_id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
+          },
+          "name": {
+            "type": "string",
+            "example": "programming introduction"
+          },
+          "video": {
+            "type": "string",
+            "example": "https://www.youtube.com/watch?v=xvFZjo5PgG0"
+          },
+          "duration": {
+            "type": "number",
+            "example": 10
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "datetime",
+            "example": "2023-11-24T17:07:16.802Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "datetime",
+            "example": "2023-11-24T17:07:16.802Z"
+          }
+        }
+      },
+      "Course-Input": {
         "type": "object",
         "properties": {
           "name": {
@@ -2285,10 +3356,6 @@
             "type": "string",
             "example": "Harris s v"
           },
-          "rate": {
-            "type": "number",
-            "example": 4.9
-          },
           "price": {
             "type": "number",
             "example": 7999999
@@ -2298,10 +3365,6 @@
             "example": "premium"
           },
           "description": {
-            "type": "string",
-            "example": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"
-          },
-          "target_audience": {
             "type": "string",
             "example": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"
           },
@@ -2319,15 +3382,29 @@
           }
         }
       },
-      "Module": {
+      "Chapter-Input": {
         "type": "object",
         "properties": {
-          "id": {
+          "course_id": {
             "type": "string",
             "format": "uuid",
             "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
           },
-          "course_id": {
+          "name": {
+            "type": "string",
+            "format": "uuid",
+            "example": "introduction"
+          },
+          "is_premium": {
+            "type": "boolean",
+            "example": false
+          }
+        }
+      },
+      "Module-Input": {
+        "type": "object",
+        "properties": {
+          "chpater_id": {
             "type": "string",
             "format": "uuid",
             "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
@@ -2336,10 +3413,6 @@
             "type": "string",
             "example": "programming introduction"
           },
-          "number": {
-            "type": "number",
-            "example": "string"
-          },
           "video": {
             "type": "string",
             "example": "https://www.youtube.com/watch?v=xvFZjo5PgG0"
@@ -2347,28 +3420,135 @@
           "duration": {
             "type": "number",
             "example": 10
-          },
-          "is_complete": {
-            "type": "boolean",
-            "example": false
-          },
-          "is_locked": {
-            "type": "boolean",
-            "example": true
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "datetime",
-            "example": "2023-11-24T17:07:16.802Z"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "datetime",
-            "example": "2023-11-24T17:07:16.802Z"
           }
         }
       },
-      "Course_Card": {
+      "Course-Details": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
+          },
+          "name": {
+            "type": "string",
+            "example": "Web Development 101"
+          },
+          "code": {
+            "type": "string",
+            "example": "WD1130"
+          },
+          "level": {
+            "type": "string",
+            "example": "Beginner"
+          },
+          "category": {
+            "type": "object",
+            "properties": {
+              "category": {
+                "type": "string",
+                "example": "Web Development"
+              }
+            }
+          },
+          "facilitator": {
+            "type": "string",
+            "example": "Harris s v"
+          },
+          "price": {
+            "type": "number",
+            "example": 7999999
+          },
+          "type_class": {
+            "type": "string",
+            "example": "premium"
+          },
+          "description": {
+            "type": "string",
+            "example": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"
+          },
+          "telegram_group": {
+            "type": "string",
+            "example": "https://t.me/+CgHkE3Xy4Dk5ZWM9"
+          },
+          "on_boarding": {
+            "type": "string",
+            "example": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+          },
+          "introduction_video": {
+            "type": "string",
+            "example": "https://www.youtube.com/watch?v=xvFZjo5PgG0"
+          },
+          "chapters": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "format": "uuid",
+                  "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "introduction"
+                },
+                "is_premium": {
+                  "type": "string",
+                  "format": "boolean",
+                  "example": false
+                }
+              }
+            }
+          }
+        }
+      },
+      "Chapter-Details": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
+          },
+          "name": {
+            "type": "string",
+            "format": "uuid",
+            "example": "introduction"
+          },
+          "is_premium": {
+            "type": "boolean",
+            "example": false
+          },
+          "modules": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "format": "uuid",
+                  "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
+                },
+                "name": {
+                  "type": "string",
+                  "example": "programming introduction"
+                },
+                "video": {
+                  "type": "string",
+                  "example": "https://www.youtube.com/watch?v=xvFZjo5PgG0"
+                },
+                "duration": {
+                  "type": "number",
+                  "example": 10
+                }
+              }
+            }
+          }
+        }
+      },
+      "Course-Card": {
         "type": "array",
         "items": {
           "type": "object",
@@ -2403,10 +3583,6 @@
               "type": "string",
               "example": "Harris s v"
             },
-            "rate": {
-              "type": "number",
-              "example": 4.9
-            },
             "price": {
               "type": "number",
               "example": 7999999
@@ -2422,107 +3598,6 @@
             "total_duration": {
               "type": "number",
               "example": 120
-            }
-          }
-        }
-      },
-      "Course_Details": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid",
-            "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
-          },
-          "name": {
-            "type": "string",
-            "example": "Web Development 101"
-          },
-          "code": {
-            "type": "string",
-            "example": "WD1130"
-          },
-          "level": {
-            "type": "string",
-            "example": "Beginner"
-          },
-          "category": {
-            "type": "object",
-            "properties": {
-              "category": {
-                "type": "string",
-                "example": "Web Development"
-              }
-            }
-          },
-          "facilitator": {
-            "type": "string",
-            "example": "Harris s v"
-          },
-          "rate": {
-            "type": "number",
-            "example": 4.9
-          },
-          "price": {
-            "type": "number",
-            "example": 7999999
-          },
-          "type_class": {
-            "type": "string",
-            "example": "premium"
-          },
-          "description": {
-            "type": "string",
-            "example": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"
-          },
-          "target_audience": {
-            "type": "string",
-            "example": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"
-          },
-          "telegram_group": {
-            "type": "string",
-            "example": "https://t.me/+CgHkE3Xy4Dk5ZWM9"
-          },
-          "on_boarding": {
-            "type": "string",
-            "example": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-          },
-          "introduction_video": {
-            "type": "string",
-            "example": "https://www.youtube.com/watch?v=xvFZjo5PgG0"
-          },
-          "moduls": {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "string",
-                "format": "uuid",
-                "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
-              },
-              "name": {
-                "type": "string",
-                "example": "programming introduction"
-              },
-              "number": {
-                "type": "number",
-                "example": "string"
-              },
-              "video": {
-                "type": "string",
-                "example": "https://www.youtube.com/watch?v=xvFZjo5PgG0"
-              },
-              "duration": {
-                "type": "number",
-                "example": 10
-              },
-              "is_complete": {
-                "type": "boolean",
-                "example": false
-              },
-              "is_locked": {
-                "type": "boolean",
-                "example": true
-              }
             }
           }
         }
