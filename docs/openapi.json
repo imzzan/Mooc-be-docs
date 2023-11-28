@@ -2074,7 +2074,7 @@
           "Chapter"
         ],
         "summary": "Get all Chapter",
-        "description": "Get all available chapter, if there is query params which is course id, return chapter that belongs to that course",
+        "description": "Get all available chapters, if there is query params which is course id, return chapters that belong to that course",
         "parameters": [
           {
             "name": "course_id",
@@ -2122,7 +2122,7 @@
                             "format": "uuid",
                             "example": "introduction"
                           },
-                          "is_premium": {
+                          "is_locked": {
                             "type": "boolean",
                             "example": false
                           }
@@ -2724,7 +2724,7 @@
           "Module"
         ],
         "summary": "Get all Module",
-        "description": "Get all available module, if there is query params which is chapter id, return module that belongs to that chapter",
+        "description": "Get all the available modules, if there is a query params which is the chapter id, it will return the module that belongs to that chapter.",
         "parameters": [
           {
             "in": "query",
@@ -3371,6 +3371,139 @@
           }
         ]
       }
+    },
+    "/api/admin/data": {
+      "get": {
+        "tags": [
+          "Data Count"
+        ],
+        "summary": "Get data counts",
+        "description": "Get user, course, and premium course data counts",
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Get data counts success"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "users": {
+                          "type": "number",
+                          "example": 420
+                        },
+                        "courses": {
+                          "type": "number",
+                          "example": 420
+                        },
+                        "premium_courses": {
+                          "type": "number",
+                          "example": 420
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in client side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Client error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Forbidden"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in server side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Server Error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer_auth": []
+          }
+        ]
+      }
     }
   },
   "components": {
@@ -3563,7 +3696,7 @@
             "format": "uuid",
             "example": "introduction"
           },
-          "is_premium": {
+          "is_locked": {
             "type": "boolean",
             "example": false
           },
@@ -3679,7 +3812,7 @@
             "format": "uuid",
             "example": "introduction"
           },
-          "is_premium": {
+          "is_locked": {
             "type": "boolean",
             "example": false
           }
@@ -3778,7 +3911,7 @@
                   "type": "string",
                   "example": "introduction"
                 },
-                "is_premium": {
+                "is_locked": {
                   "type": "string",
                   "format": "boolean",
                   "example": false
@@ -3801,7 +3934,7 @@
             "format": "uuid",
             "example": "introduction"
           },
-          "is_premium": {
+          "is_locked": {
             "type": "boolean",
             "example": false
           },
