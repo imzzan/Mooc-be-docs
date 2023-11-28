@@ -449,7 +449,7 @@
       }
     },
     "/api/reset/password/{tokenResetPassword}": {
-      "post": {
+      "put": {
         "tags": [
           "Authentication"
         ],
