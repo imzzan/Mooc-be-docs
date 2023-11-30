@@ -7,7 +7,7 @@
   },
   "servers": [
     {
-      "url": "-"
+      "url": "https://befinalprojectbinar-production.up.railway.app/"
     }
   ],
   "externalDocs": {
@@ -365,192 +365,6 @@
         }
       }
     },
-    "/api/reset/password": {
-      "post": {
-        "tags": [
-          "Authentication"
-        ],
-        "summary": "Send Email for reset password",
-        "description": "Send Email for reset password",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "email": {
-                    "type": "string",
-                    "uniqueItems": true
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "User successfully login",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "OK"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Success"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Error in client side",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "FAIL"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Email user not found"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Error in Ssrver",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "FAIL"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Server Error"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/reset/password/{tokenResetPassword}": {
-      "put": {
-        "tags": [
-          "Authentication"
-        ],
-        "parameters": [
-          {
-            "name": "tokenResetPassword",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "summary": "Endpoint reset pasword from email address",
-        "description": "Endpoint reset password from email address",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "new_password": {
-                    "type": "string"
-                  },
-                  "confirm_password": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "User successfully login",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "OK"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Success"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Error in client side",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "FAIL"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Email user not found"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Error in Ssrver",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "FAIL"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Server Error"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/user": {
       "get": {
         "tags": [
@@ -839,8 +653,8 @@
         "tags": [
           "User"
         ],
-        "summary": "Update Password",
-        "description": "Update Password",
+        "summary": "Reset Password",
+        "description": "Reset Password",
         "requestBody": {
           "required": true,
           "content": {
@@ -1212,7 +1026,7 @@
         ]
       }
     },
-    "/api/course/me": {
+    "/api/courses/me": {
       "get": {
         "tags": [
           "Course"
@@ -1387,7 +1201,7 @@
         ]
       }
     },
-    "/api/admin/course": {
+    "/api/admin/courses": {
       "post": {
         "tags": [
           "Course"
@@ -1676,7 +1490,7 @@
         ]
       }
     },
-    "/api/course": {
+    "/api/courses": {
       "get": {
         "tags": [
           "Course"
