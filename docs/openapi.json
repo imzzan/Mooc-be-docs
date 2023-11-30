@@ -1336,8 +1336,8 @@
         "summary": "Get all Courses",
         "description": "Get all Courses",
         "responses": {
-          "201": {
-            "description": "Created new course success",
+          "200": {
+            "description": "Get all course success",
             "content": {
               "application/json": {
                 "schema": {
