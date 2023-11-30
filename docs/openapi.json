@@ -1087,7 +1087,7 @@
                                 "type": "string",
                                 "example": "Harris s v"
                               },
-                              "total_modul": {
+                              "total_chaptere": {
                                 "type": "number",
                                 "example": 10
                               },
@@ -1097,9 +1097,13 @@
                               }
                             }
                           },
+                          "total_finished_module": {
+                            "type": "number",
+                            "example": 4
+                          },
                           "progress_course": {
                             "type": "number",
-                            "example": 42
+                            "example": 40
                           }
                         }
                       }
@@ -1378,11 +1382,15 @@
                               }
                             }
                           },
+                          "facilitator": {
+                            "type": "string",
+                            "example": "Harris s v"
+                          },
                           "price": {
                             "type": "number",
                             "example": 7999999
                           },
-                          "type_class": {
+                          "type": {
                             "type": "string",
                             "example": "premium"
                           }
@@ -2122,6 +2130,10 @@
                             "format": "uuid",
                             "example": "introduction"
                           },
+                          "index": {
+                            "type": "integer",
+                            "example": 1
+                          },
                           "is_locked": {
                             "type": "boolean",
                             "example": false
@@ -2656,6 +2668,15 @@
                           "format": "uuid",
                           "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
                         },
+                        "chapter_id": {
+                          "type": "string",
+                          "format": "uuid",
+                          "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
+                        },
+                        "index": {
+                          "type": "number",
+                          "example": 1
+                        },
                         "name": {
                           "type": "string",
                           "example": "programming introduction"
@@ -2766,6 +2787,10 @@
                             "type": "string",
                             "format": "uuid",
                             "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
+                          },
+                          "index": {
+                            "type": "number",
+                            "example": 1
                           },
                           "name": {
                             "type": "string",
@@ -3628,7 +3653,7 @@
             "type": "number",
             "example": 7999999
           },
-          "type_class": {
+          "type": {
             "type": "string",
             "example": "premium"
           },
@@ -3695,6 +3720,14 @@
             "type": "string",
             "format": "uuid",
             "example": "introduction"
+          },
+          "index": {
+            "type": "integer",
+            "example": 1
+          },
+          "total_module_duration": {
+            "type": "number",
+            "example": 420
           },
           "is_locked": {
             "type": "boolean",
@@ -3777,7 +3810,7 @@
             "type": "number",
             "example": 7999999
           },
-          "type_class": {
+          "type": {
             "type": "string",
             "example": "premium"
           },
@@ -3811,10 +3844,6 @@
             "type": "string",
             "format": "uuid",
             "example": "introduction"
-          },
-          "is_locked": {
-            "type": "boolean",
-            "example": false
           }
         }
       },
@@ -3877,7 +3906,7 @@
             "type": "number",
             "example": 7999999
           },
-          "type_class": {
+          "type": {
             "type": "string",
             "example": "premium"
           },
@@ -3911,6 +3940,10 @@
                   "type": "string",
                   "example": "introduction"
                 },
+                "index": {
+                  "type": "integer",
+                  "example": 1
+                },
                 "is_locked": {
                   "type": "string",
                   "format": "boolean",
@@ -3929,10 +3962,23 @@
             "format": "uuid",
             "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
           },
+          "course_id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
+          },
           "name": {
             "type": "string",
             "format": "uuid",
             "example": "introduction"
+          },
+          "index": {
+            "type": "integer",
+            "example": 1
+          },
+          "total_module_duration": {
+            "type": "number",
+            "example": 420
           },
           "is_locked": {
             "type": "boolean",
@@ -3947,6 +3993,10 @@
                   "type": "string",
                   "format": "uuid",
                   "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
+                },
+                "index": {
+                  "type": "integer",
+                  "example": 1
                 },
                 "name": {
                   "type": "string",
@@ -4004,11 +4054,11 @@
               "type": "number",
               "example": 7999999
             },
-            "type_class": {
+            "type": {
               "type": "string",
               "example": "premium"
             },
-            "total_modul": {
+            "total_chapter": {
               "type": "number",
               "example": 10
             },
