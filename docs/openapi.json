@@ -60,17 +60,21 @@
                 "type": "object",
                 "properties": {
                   "name": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "Jhon smith"
                   },
                   "email": {
                     "type": "string",
+                    "default": "jhonsmith@gmail.com",
                     "uniqueItems": true
                   },
                   "password": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "jhon123"
                   },
                   "no_telp": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "+6265656566776"
                   }
                 }
               }
@@ -97,7 +101,8 @@
                       "type": "object",
                       "properties": {
                         "accessToken": {
-                          "type": "string"
+                          "type": "string",
+                          "default": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
                         }
                       }
                     }
@@ -185,10 +190,12 @@
                 "properties": {
                   "id": {
                     "type": "string",
+                    "default": "59edfa3e-8ade-40d2-b582-186e0c017c1f",
                     "uniqueItems": true
                   },
                   "password": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "admin123"
                   }
                 }
               }
@@ -215,7 +222,8 @@
                       "type": "object",
                       "properties": {
                         "accessToken": {
-                          "type": "string"
+                          "type": "string",
+                          "default": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
                         }
                       }
                     }
@@ -283,11 +291,12 @@
                 "properties": {
                   "argument1": {
                     "type": "string",
-                    "description": "email or phone_number",
+                    "default": "jhonsmith@gmail.com",
                     "uniqueItems": true
                   },
                   "password": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "jhonsmith123"
                   }
                 }
               }
@@ -314,7 +323,8 @@
                       "type": "object",
                       "properties": {
                         "accessToken": {
-                          "type": "string"
+                          "type": "string",
+                          "default": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
                         }
                       }
                     }
@@ -393,30 +403,29 @@
                       "type": "object",
                       "properties": {
                         "name": {
-                          "type": "string"
+                          "type": "string",
+                          "example": "jhonsmith"
                         },
                         "email": {
                           "type": "string",
+                          "example": "jhonsmith@gmail.com",
                           "uniqueItems": true
                         },
-                        "password": {
-                          "type": "string"
-                        },
                         "no_telp": {
-                          "type": "string"
-                        },
-                        "role": {
                           "type": "string",
-                          "default": "member"
+                          "example": "+62657657768"
                         },
                         "country": {
-                          "type": "string"
+                          "type": "string",
+                          "example": "Indonesia"
                         },
                         "city": {
-                          "type": "string"
+                          "type": "string",
+                          "example": "saranjana"
                         },
                         "photo": {
-                          "type": "string"
+                          "type": "string",
+                          "example": "profile.png"
                         }
                       }
                     }
@@ -506,23 +515,29 @@
                 "type": "object",
                 "properties": {
                   "name": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "jhonsmith"
                   },
                   "email": {
                     "type": "string",
+                    "example": "jhonsmith@gmail.com",
                     "uniqueItems": true
                   },
                   "no_telp": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "+62657657768"
                   },
                   "country": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "Indonesia"
                   },
                   "city": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "saranjana"
                   },
                   "photo": {
-                    "type": "string"
+                    "type": "string",
+                    "example": "profile.png"
                   }
                 }
               }
@@ -549,30 +564,29 @@
                       "type": "object",
                       "properties": {
                         "name": {
-                          "type": "string"
+                          "type": "string",
+                          "example": "jhonsmith"
                         },
                         "email": {
                           "type": "string",
+                          "example": "jhonsmith@gmail.com",
                           "uniqueItems": true
                         },
-                        "password": {
-                          "type": "string"
-                        },
                         "no_telp": {
-                          "type": "string"
-                        },
-                        "role": {
                           "type": "string",
-                          "default": "member"
+                          "example": "+62657657768"
                         },
                         "country": {
-                          "type": "string"
+                          "type": "string",
+                          "example": "Indonesia"
                         },
                         "city": {
-                          "type": "string"
+                          "type": "string",
+                          "example": "saranjana"
                         },
                         "photo": {
-                          "type": "string"
+                          "type": "string",
+                          "example": "profile.png"
                         }
                       }
                     }
@@ -654,8 +668,8 @@
         "tags": [
           "Authentication"
         ],
-        "summary": "Reset password",
-        "description": "Reset Password",
+        "summary": "Send email link reset password",
+        "description": "send email link reset password",
         "requestBody": {
           "required": true,
           "content": {
@@ -664,7 +678,8 @@
                 "type": "object",
                 "properties": {
                   "email": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "jhon123@gmail.com"
                   }
                 }
               }
@@ -685,15 +700,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "default": "User successfully login"
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "accessToken": {
-                          "type": "string"
-                        }
-                      }
+                      "default": "Email terkirim"
                     }
                   }
                 }
@@ -744,7 +751,7 @@
       }
     },
     "/api/reset/password/{tokenResetPassword}": {
-      "post": {
+      "put": {
         "tags": [
           "Authentication"
         ],
@@ -757,8 +764,13 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "email": {
-                    "type": "string"
+                  "new_password": {
+                    "type": "string",
+                    "default": "jhonsmith123"
+                  },
+                  "confirm_password": {
+                    "type": "string",
+                    "default": "jhonsmith123"
                   }
                 }
               }
@@ -779,15 +791,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "default": "User successfully login"
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "accessToken": {
-                          "type": "string"
-                        }
-                      }
+                      "default": "Success"
                     }
                   }
                 }
@@ -842,8 +846,8 @@
         "tags": [
           "User"
         ],
-        "summary": "Reset Password",
-        "description": "Reset Password",
+        "summary": "Update Password",
+        "description": "Update Password",
         "requestBody": {
           "required": true,
           "content": {
@@ -853,13 +857,16 @@
                 "properties": {
                   "old_password": {
                     "type": "string",
+                    "default": "jhonsmith123",
                     "uniqueItems": true
                   },
                   "new_password": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "aku ganteng"
                   },
                   "confirm_password": {
-                    "type": "string"
+                    "type": "string",
+                    "default": "aku ganteng"
                   }
                 }
               }
@@ -867,7 +874,7 @@
           }
         },
         "responses": {
-          "201": {
+          "200": {
             "description": "User Successfully changed password",
             "content": {
               "application/json": {
@@ -880,7 +887,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "default": "Password successfully changed"
+                      "default": "Success"
                     }
                   }
                 }
@@ -976,7 +983,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "default": "Email successfully delivered"
+                      "default": "Email terkirim"
                     }
                   }
                 }
@@ -1084,22 +1091,28 @@
                 "type": "object",
                 "properties": {
                   "code1": {
-                    "type": "string"
+                    "type": "string",
+                    "default": 5
                   },
                   "code2": {
-                    "type": "string"
+                    "type": "string",
+                    "default": 3
                   },
                   "code3": {
-                    "type": "string"
+                    "type": "string",
+                    "default": 6
                   },
                   "code4": {
-                    "type": "string"
+                    "type": "string",
+                    "default": 7
                   },
                   "code5": {
-                    "type": "string"
+                    "type": "string",
+                    "default" :4
                   },
                   "code6": {
-                    "type": "string"
+                    "type": "string",
+                    "default": 3
                   }
                 }
               }
