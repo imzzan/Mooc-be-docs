@@ -281,8 +281,9 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "email": {
+                  "argument1": {
                     "type": "string",
+                    "description": "email or phone_number",
                     "uniqueItems": true
                   },
                   "password": {
