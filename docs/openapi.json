@@ -757,6 +757,16 @@
         ],
         "summary": "Reset password",
         "description": "Reset Password",
+        "parameters": [
+          {
+            "name": "tokenResetPassword",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -1108,7 +1118,7 @@
                   },
                   "code5": {
                     "type": "string",
-                    "default" :4
+                    "default": 4
                   },
                   "code6": {
                     "type": "string",
@@ -2021,7 +2031,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "default": "Course successfully deleted"
+                      "default": "Delete course success"
                     }
                   }
                 }
@@ -4014,7 +4024,7 @@
           },
           "type": {
             "type": "string",
-            "example": "premium"
+            "example": "Premium"
           },
           "description": {
             "type": "string",
@@ -4052,7 +4062,7 @@
       "Module-Input": {
         "type": "object",
         "properties": {
-          "chpater_id": {
+          "chapter_id": {
             "type": "string",
             "format": "uuid",
             "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
