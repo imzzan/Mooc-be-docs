@@ -1808,7 +1808,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "default": "Get course by id success"
+                      "default": "Get course detail success"
                     },
                     "data": {
                       "$ref": "#/components/schemas/Course-Details"
@@ -1890,7 +1890,7 @@
           }
         },
         "responses": {
-          "201": {
+          "200": {
             "description": "success updating course",
             "content": {
               "application/json": {
@@ -2602,7 +2602,7 @@
           }
         },
         "responses": {
-          "201": {
+          "200": {
             "description": "ok",
             "content": {
               "application/json": {
@@ -2615,7 +2615,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "default": "Create new module success"
+                      "default": "Update chapter success"
                     },
                     "data": {
                       "$ref": "#/components/schemas/Chapter"
@@ -2743,7 +2743,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "default": "Chapter successfully deleted"
+                      "default": "Delete chapter success"
                     }
                   }
                 }
@@ -3268,7 +3268,7 @@
           }
         },
         "responses": {
-          "201": {
+          "200": {
             "description": "ok",
             "content": {
               "application/json": {
@@ -3281,7 +3281,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "default": "Module successfully updated"
+                      "default": "Update module success"
                     },
                     "data": {
                       "$ref": "#/components/schemas/Module"
@@ -3409,7 +3409,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "default": "Module successfully deleted"
+                      "default": "Delete module success"
                     }
                   }
                 }
