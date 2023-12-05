@@ -3529,11 +3529,11 @@
         "tags": [
           "Order"
         ],
-        "summary": "Get all order",
-        "description": "Get all order from user",
+        "summary": "Get order by user",
+        "description": "Get all order by user with jwt",
         "responses": {
           "200": {
-            "description": "ok",
+            "description": "Get all order success",
             "content": {
               "application/json": {
                 "schema": {
@@ -3542,6 +3542,93 @@
                     "status": {
                       "type": "string",
                       "default": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Get all order success"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Order"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in client side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Client error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Forbidden"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in server side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Server Error"
                     }
                   }
                 }
@@ -3560,10 +3647,27 @@
           "Order"
         ],
         "summary": "Create order for course",
-        "description": "Creating order to buying premium course",
+        "description": "Create order to buy premium course",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "course_id": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+                  }
+                }
+              }
+            }
+          }
+        },
         "responses": {
           "201": {
-            "description": "ok",
+            "description": "Create order success",
             "content": {
               "application/json": {
                 "schema": {
@@ -3572,6 +3676,93 @@
                     "status": {
                       "type": "string",
                       "default": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Create order success"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Order-before-Payment"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in client side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Client error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Forbidden"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in server side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Server Error"
                     }
                   }
                 }
@@ -3586,16 +3777,286 @@
         ]
       }
     },
-    "/api/orders/{user_id}": {
+    "/api/orders/{order_id}": {
+      "put": {
+        "tags": [
+          "Order"
+        ],
+        "summary": "Update order",
+        "description": "Update order status by their id",
+        "parameters": [
+          {
+            "name": "order_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "course_id": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+                  },
+                  "ordder_method": {
+                    "type": "string",
+                    "example": "Credit Card"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Update order success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Update order success"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Order-after-Payment"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in client side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Client error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Forbidden"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in server side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Server Error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer_auth": []
+          }
+        ]
+      }
+    },
+    "/api/admin/orders": {
       "get": {
         "tags": [
           "Order"
         ],
-        "summary": "Get all by user id",
-        "description": "Get all by order id",
+        "summary": "Get all order",
+        "description": "Get all order from user for admin",
+        "responses": {
+          "200": {
+            "description": "Get all order success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Get all order success"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Order"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in client side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Client error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Forbidden"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in server side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Server Error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer_auth": []
+          }
+        ]
+      }
+    },
+    "/api/admin/orders/{order_id}": {
+      "get": {
+        "tags": [
+          "Order"
+        ],
+        "summary": "Get order by id",
+        "description": "Getorder by id",
         "parameters": [
           {
-            "name": "user_id",
+            "name": "order_id",
             "in": "path",
             "required": true,
             "schema": {
@@ -3615,6 +4076,93 @@
                     "status": {
                       "type": "string",
                       "default": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Get order by id success"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Order-Details"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in client side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Client error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Forbidden"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in server side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Server Error"
                     }
                   }
                 }
@@ -4298,6 +4846,230 @@
               "type": "number",
               "example": 120
             }
+          }
+        }
+      },
+      "Order": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+          },
+          "user": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "uuid",
+                "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+              },
+              "email": {
+                "type": "string",
+                "example": "john@smith.com"
+              }
+            }
+          },
+          "course": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "uuid",
+                "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+              },
+              "name": {
+                "type": "string",
+                "example": "Web Development 101"
+              },
+              "category": {
+                "type": "object",
+                "properties": {
+                  "category": {
+                    "type": "string",
+                    "example": "Web Development"
+                  }
+                }
+              }
+            }
+          },
+          "status": {
+            "type": "string",
+            "example": "SUDAH BAYAR"
+          },
+          "order_method": {
+            "type": "string",
+            "nullable": true,
+            "example": "Credit Cars"
+          },
+          "payment_date": {
+            "type": "string",
+            "format": "datetime",
+            "nullable": true,
+            "example": "2023-11-24T17:07:16.802Z"
+          }
+        }
+      },
+      "Order-before-Payment": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+          },
+          "user_id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+          },
+          "course_id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+          },
+          "status": {
+            "type": "string",
+            "default": "BELUM BAYAR"
+          },
+          "order_method": {
+            "type": "string",
+            "nullable": true,
+            "default": null
+          },
+          "payment_date": {
+            "type": "string",
+            "format": "datetime",
+            "nullable": true,
+            "default": null
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "datetime",
+            "example": "2023-11-24T17:07:16.802Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "datetime",
+            "example": "2023-11-24T17:07:16.802Z"
+          }
+        }
+      },
+      "Order-after-Payment": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+          },
+          "user_id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+          },
+          "course_id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+          },
+          "status": {
+            "type": "string",
+            "example": "SUDAH BAYAR"
+          },
+          "order_method": {
+            "type": "string",
+            "nullable": true,
+            "example": "Credit Cars"
+          },
+          "payment_date": {
+            "type": "string",
+            "format": "datetime",
+            "nullable": true,
+            "example": "2023-11-24T17:07:16.802Z"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "datetime",
+            "example": "2023-11-24T17:07:16.802Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "datetime",
+            "example": "2023-11-24T17:07:16.802Z"
+          }
+        }
+      },
+      "Order-Details": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+          },
+          "user": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "uuid",
+                "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+              },
+              "email": {
+                "type": "string",
+                "example": "john@smith.com"
+              }
+            }
+          },
+          "course": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "uuid",
+                "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+              },
+              "name": {
+                "type": "string",
+                "example": "Web Development 101"
+              },
+              "category": {
+                "type": "object",
+                "properties": {
+                  "category": {
+                    "type": "string",
+                    "example": "Web Development"
+                  }
+                }
+              }
+            }
+          },
+          "status": {
+            "type": "string",
+            "example": "SUDAH BAYAR"
+          },
+          "order_method": {
+            "type": "string",
+            "nullable": true,
+            "example": "Credit Cars"
+          },
+          "payment_date": {
+            "type": "string",
+            "format": "datetime",
+            "nullable": true,
+            "example": "2023-11-24T17:07:16.802Z"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "datetime",
+            "example": "2023-11-24T17:07:16.802Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "datetime",
+            "example": "2023-11-24T17:07:16.802Z"
           }
         }
       }
