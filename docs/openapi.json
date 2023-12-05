@@ -1526,7 +1526,7 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "Get Course success",
             "content": {
               "application/json": {
@@ -4731,6 +4731,14 @@
                 }
               }
             }
+          },
+          "total_chapter": {
+            "type": "number",
+            "example": 10
+          },
+          "total_duration": {
+            "type": "number",
+            "example": 120
           }
         }
       },
