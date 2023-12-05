@@ -45,7 +45,7 @@
     }
   ],
   "paths": {
-    "/api/regsiter": {
+    "/api/register": {
       "post": {
         "tags": [
           "Authentication"
@@ -72,7 +72,7 @@
                     "type": "string",
                     "default": "jhon123"
                   },
-                  "no_telp": {
+                  "phone_number": {
                     "type": "string",
                     "default": "+6265656566776"
                   }
@@ -82,7 +82,7 @@
           }
         },
         "responses": {
-          "201": {
+          "200": {
             "description": "User successfully registered",
             "content": {
               "application/json": {
@@ -95,16 +95,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "default": "User successfully registered"
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "accessToken": {
-                          "type": "string",
-                          "default": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
-                        }
-                      }
+                      "default": "Email sent"
                     }
                   }
                 }
@@ -190,7 +181,7 @@
                 "properties": {
                   "id": {
                     "type": "string",
-                    "default": "59edfa3e-8ade-40d2-b582-186e0c017c1f",
+                    "default": "42dc24e3-d5cb-4bcb-afc6-97c1099ab3a0",
                     "uniqueItems": true
                   },
                   "password": {
@@ -216,7 +207,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "default": "User login successfully"
+                      "default": "Login success"
                     },
                     "data": {
                       "type": "object",
@@ -289,7 +280,7 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "argument1": {
+                  "emailOrPhone": {
                     "type": "string",
                     "default": "jhonsmith@gmail.com",
                     "uniqueItems": true
@@ -317,7 +308,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "default": "User successfully login"
+                      "default": "Login success"
                     },
                     "data": {
                       "type": "object",
@@ -384,8 +375,8 @@
         "summary": "Get user Profile",
         "description": "Get User Profile by jwt",
         "responses": {
-          "201": {
-            "description": "User successfully Updated",
+          "200": {
+            "description": "Get user detail success",
             "content": {
               "application/json": {
                 "schema": {
@@ -397,7 +388,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "default": "User successfully Updated"
+                      "default": "Get user informastion success"
                     },
                     "data": {
                       "type": "object",
@@ -523,7 +514,7 @@
                     "example": "jhonsmith@gmail.com",
                     "uniqueItems": true
                   },
-                  "no_telp": {
+                  "phone_number": {
                     "type": "string",
                     "example": "+62657657768"
                   },
@@ -558,7 +549,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "default": "User successfully Updated"
+                      "default": "Update user success"
                     },
                     "data": {
                       "type": "object",
@@ -572,7 +563,7 @@
                           "example": "jhonsmith@gmail.com",
                           "uniqueItems": true
                         },
-                        "no_telp": {
+                        "phone_number": {
                           "type": "string",
                           "example": "+62657657768"
                         },
@@ -700,7 +691,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "default": "Email terkirim"
+                      "default": "Email sent"
                     }
                   }
                 }
@@ -801,7 +792,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "default": "Success"
+                      "default": "Reset password success"
                     }
                   }
                 }
@@ -897,7 +888,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "default": "Success"
+                      "default": "Update password success"
                     }
                   }
                 }
@@ -993,7 +984,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "default": "Email terkirim"
+                      "default": "Email sent"
                     }
                   }
                 }
@@ -1143,7 +1134,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "default": "success"
+                      "default": "Confirm OTP code success"
                     }
                   }
                 }
@@ -1444,7 +1435,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "default": "New course successfully created"
+                      "default": "Create course success"
                     },
                     "data": {
                       "$ref": "#/components/schemas/Course"
@@ -1561,7 +1552,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "default": "Get all courses successfully created"
+                      "default": "Get all courses success"
                     },
                     "data": {
                       "type": "array",
@@ -1708,7 +1699,36 @@
           "Course"
         ],
         "summary": "Get all course",
-        "description": "Get all course available with simplified information",
+        "description": "Get all course available with simplified information and filter it if there is query params",
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "Paling Baru"
+            },
+            "description": "filter to return certain course with newest or oldest order"
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "Web Development"
+            },
+            "description": "Category of course to return certain course"
+          },
+          {
+            "name": "level",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "Beginner"
+            },
+            "description": "Level of course to return certain course"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Get all course successfully",
@@ -1808,7 +1828,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "default": "Get course detail success"
+                      "default": "Get detail course success"
                     },
                     "data": {
                       "$ref": "#/components/schemas/Course-Details"
@@ -1890,7 +1910,7 @@
           }
         },
         "responses": {
-          "200": {
+          "201": {
             "description": "success updating course",
             "content": {
               "application/json": {
@@ -1903,7 +1923,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "default": "Course Successfully updated"
+                      "default": "Update course success"
                     },
                     "data": {
                       "$ref": "#/components/schemas/Course"
@@ -2235,7 +2255,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "default": "Get chapter detail success"
+                      "default": "Get detail chapter success"
                     },
                     "data": {
                       "$ref": "#/components/schemas/Chapter-Details"
@@ -2320,7 +2340,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "default": "Get chapters success"
+                      "default": "Get all chapters success"
                     },
                     "data": {
                       "type": "array",
@@ -2475,7 +2495,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "default": "Create new module success"
+                      "default": "Create chapter success"
                     },
                     "data": {
                       "$ref": "#/components/schemas/Chapter"
@@ -2602,7 +2622,7 @@
           }
         },
         "responses": {
-          "200": {
+          "201": {
             "description": "ok",
             "content": {
               "application/json": {
@@ -2870,7 +2890,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "default": "Get module detail success"
+                      "default": "Get detail module success"
                     },
                     "data": {
                       "type": "object",
@@ -2983,7 +3003,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "default": "Get modules success"
+                      "default": "Get all modules success"
                     },
                     "data": {
                       "type": "array",
@@ -3141,7 +3161,7 @@
                     },
                     "message": {
                       "type": "string",
-                      "default": "Module successfully updated"
+                      "default": "Create module success"
                     },
                     "data": {
                       "$ref": "#/components/schemas/Module"
@@ -3268,7 +3288,7 @@
           }
         },
         "responses": {
-          "200": {
+          "201": {
             "description": "ok",
             "content": {
               "application/json": {
