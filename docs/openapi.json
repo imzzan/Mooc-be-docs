@@ -165,12 +165,12 @@
         }
       }
     },
-    "/api/admin/login": {
+    "/api/login": {
       "post": {
         "tags": [
           "Authentication"
         ],
-        "summary": "Only admin could login in this enpoint",
+        "summary": "All User could login in this enpoint",
         "description": "All User could login in this enpoint",
         "requestBody": {
           "required": true,
@@ -179,14 +179,14 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "id": {
+                  "emailOrPhone": {
                     "type": "string",
-                    "default": "42dc24e3-d5cb-4bcb-afc6-97c1099ab3a0",
+                    "default": "jhonsmith@gmail.com",
                     "uniqueItems": true
                   },
                   "password": {
                     "type": "string",
-                    "default": "admin123"
+                    "default": "jhonsmith123"
                   }
                 }
               }
@@ -266,12 +266,12 @@
         }
       }
     },
-    "/api/login": {
+    "/api/admin/login": {
       "post": {
         "tags": [
           "Authentication"
         ],
-        "summary": "All User could login in this enpoint",
+        "summary": "Only admin could login in this enpoint",
         "description": "All User could login in this enpoint",
         "requestBody": {
           "required": true,
@@ -280,14 +280,14 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "emailOrPhone": {
+                  "id": {
                     "type": "string",
-                    "default": "jhonsmith@gmail.com",
+                    "default": "42dc24e3-d5cb-4bcb-afc6-97c1099ab3a0",
                     "uniqueItems": true
                   },
                   "password": {
                     "type": "string",
-                    "default": "jhonsmith123"
+                    "default": "admin123"
                   }
                 }
               }
@@ -1404,6 +1404,194 @@
         ]
       }
     },
+    "/api/courses": {
+      "get": {
+        "tags": [
+          "Course"
+        ],
+        "summary": "Get all course",
+        "description": "Get all course available with simplified information and filter it if there is query params",
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "Paling Baru"
+            },
+            "description": "filter to return certain course with newest or oldest order"
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "Web Development"
+            },
+            "description": "Category of course to return certain course"
+          },
+          {
+            "name": "level",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "Beginner"
+            },
+            "description": "Level of course to return certain course"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get all course successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Get all courses success"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Course-Card"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in client side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Client error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in server side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Server Error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/courses/{id}": {
+      "get": {
+        "tags": [
+          "Course"
+        ],
+        "summary": "Detail Course",
+        "description": "Get Course by their id and their modules in it",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Get Course success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Get detail course success"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/Course-Details"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in client side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Client error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in server side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Server Error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/admin/courses": {
       "post": {
         "tags": [
@@ -1691,194 +1879,6 @@
             "bearer_auth": []
           }
         ]
-      }
-    },
-    "/api/courses": {
-      "get": {
-        "tags": [
-          "Course"
-        ],
-        "summary": "Get all course",
-        "description": "Get all course available with simplified information and filter it if there is query params",
-        "parameters": [
-          {
-            "name": "filter",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "example": "Paling Baru"
-            },
-            "description": "filter to return certain course with newest or oldest order"
-          },
-          {
-            "name": "category",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "example": "Web Development"
-            },
-            "description": "Category of course to return certain course"
-          },
-          {
-            "name": "level",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "example": "Beginner"
-            },
-            "description": "Level of course to return certain course"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Get all course successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "OK"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Get all courses success"
-                    },
-                    "data": {
-                      "$ref": "#/components/schemas/Course-Card"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Error in client side",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "FAIL"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Client error"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Error in server side",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "FAIL"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Server Error"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/courses/{id}": {
-      "get": {
-        "tags": [
-          "Course"
-        ],
-        "summary": "Detail Course",
-        "description": "Get Course by their id and their modules in it",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "Get Course success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "OK"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Get detail course success"
-                    },
-                    "data": {
-                      "$ref": "#/components/schemas/Course-Details"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Error in client side",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "FAIL"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Client error"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Error in server side",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "FAIL"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Server Error"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
       }
     },
     "/api/admin/courses/{id}": {
