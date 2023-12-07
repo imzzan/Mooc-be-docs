@@ -1419,7 +1419,7 @@
               "type": "string",
               "example": "Paling Baru"
             },
-            "description": "filter to return certain course with newest or oldest order"
+            "description": "filter to return certain course with newest (Paling Baru) or oldest (Promo) order"
           },
           {
             "name": "category",
@@ -1438,6 +1438,24 @@
               "example": "Beginner"
             },
             "description": "Level of course to return certain course"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "Web"
+            },
+            "description": "It will return certain course with name that contain the keyword"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "example": "Premium"
+            },
+            "description": "It will return certain course with same type (Premium or Free)"
           }
         ],
         "responses": {
@@ -4675,6 +4693,10 @@
               "category": {
                 "type": "string",
                 "example": "Web Development"
+              },
+              "image": {
+                "type": "string",
+                "example": "https://urlis.net/image_category"
               }
             }
           },
