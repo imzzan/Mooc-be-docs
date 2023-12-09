@@ -70,7 +70,7 @@
                   },
                   "password": {
                     "type": "string",
-                    "default": "jhon123"
+                    "default": "jhon0000"
                   },
                   "phone_number": {
                     "type": "string",
@@ -402,7 +402,7 @@
                           "example": "jhonsmith@gmail.com",
                           "uniqueItems": true
                         },
-                        "no_telp": {
+                        "phone_number": {
                           "type": "string",
                           "example": "+62657657768"
                         },
@@ -417,6 +417,10 @@
                         "photo": {
                           "type": "string",
                           "example": "profile.png"
+                        },
+                        "role": {
+                          "type": "string",
+                          "example": "member"
                         }
                       }
                     }
@@ -3566,7 +3570,70 @@
                       "default": "Get all order success"
                     },
                     "data": {
-                      "$ref": "#/components/schemas/Order"
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid",
+                          "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+                        },
+                        "user": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "format": "uuid",
+                              "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+                            },
+                            "email": {
+                              "type": "string",
+                              "example": "john@smith.com"
+                            }
+                          }
+                        },
+                        "course": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "format": "uuid",
+                              "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+                            },
+                            "name": {
+                              "type": "string",
+                              "example": "Web Development 101"
+                            },
+                            "category": {
+                              "type": "object",
+                              "properties": {
+                                "category": {
+                                  "type": "string",
+                                  "example": "Web Development"
+                                },
+                                "image": {
+                                  "type": "string",
+                                  "example": "https://urlis.net/image_category"
+                                }
+                              }
+                            }
+                          }
+                        },
+                        "status": {
+                          "type": "string",
+                          "example": "SUDAH BAYAR"
+                        },
+                        "order_method": {
+                          "type": "string",
+                          "nullable": true,
+                          "example": "Credit Cars"
+                        },
+                        "payment_date": {
+                          "type": "string",
+                          "format": "datetime",
+                          "nullable": true,
+                          "example": "2023-11-24T17:07:16.802Z"
+                        }
+                      }
                     }
                   }
                 }
