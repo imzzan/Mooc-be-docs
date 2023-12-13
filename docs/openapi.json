@@ -40,6 +40,10 @@
       "description": "End point about Module management"
     },
     {
+      "name": "User Tracker",
+      "description": "End point about User Tracker"
+    },
+    {
       "name": "Order",
       "description": "End Point about Order management"
     }
@@ -287,7 +291,7 @@
                   },
                   "password": {
                     "type": "string",
-                    "default": "admin123"
+                    "default": "admin3214"
                   }
                 }
               }
@@ -1233,181 +1237,6 @@
         ]
       }
     },
-    "/api/courses/me": {
-      "get": {
-        "tags": [
-          "Course"
-        ],
-        "summary": "Get course by user",
-        "description": "Get all Course by user id and their progress",
-        "responses": {
-          "200": {
-            "description": "Get all Course by user id and their progress success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "OK"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Get courses and progress success"
-                    },
-                    "data": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "id": {
-                            "type": "string",
-                            "format": "uuid",
-                            "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
-                          },
-                          "course": {
-                            "type": "object",
-                            "properties": {
-                              "name": {
-                                "type": "string",
-                                "example": "Web Development 101"
-                              },
-                              "level": {
-                                "type": "string",
-                                "example": "Beginner"
-                              },
-                              "category": {
-                                "type": "object",
-                                "properties": {
-                                  "category": {
-                                    "type": "string",
-                                    "example": "Web Development"
-                                  },
-                                  "image": {
-                                    "type": "string",
-                                    "example": "https://urlis.net/image_category"
-                                  }
-                                }
-                              },
-                              "facilitator": {
-                                "type": "string",
-                                "example": "Harris s v"
-                              },
-                              "total_chaptere": {
-                                "type": "number",
-                                "example": 10
-                              },
-                              "total_duration": {
-                                "type": "number",
-                                "example": 120
-                              }
-                            }
-                          },
-                          "total_finished_module": {
-                            "type": "number",
-                            "example": 4
-                          },
-                          "progress_course": {
-                            "type": "number",
-                            "example": 40
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Error in client side",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "FAIL"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Client error"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "FAIL"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Unauthorized"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "FAIL"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Forbidden"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Error in server side",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "FAIL"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Server Error"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "bearer_auth": []
-          }
-        ]
-      }
-    },
     "/api/courses": {
       "get": {
         "tags": [
@@ -1420,8 +1249,7 @@
             "name": "filter",
             "in": "query",
             "schema": {
-              "type": "string",
-              "example": "Paling Baru"
+              "type": "string"
             },
             "description": "filter to return certain course with newest (Paling Baru) or oldest (Promo) order"
           },
@@ -1429,8 +1257,7 @@
             "name": "category",
             "in": "query",
             "schema": {
-              "type": "string",
-              "example": "Web Development"
+              "type": "string"
             },
             "description": "Category of course to return certain course"
           },
@@ -1438,8 +1265,7 @@
             "name": "level",
             "in": "query",
             "schema": {
-              "type": "string",
-              "example": "Beginner"
+              "type": "string"
             },
             "description": "Level of course to return certain course"
           },
@@ -1447,8 +1273,7 @@
             "name": "name",
             "in": "query",
             "schema": {
-              "type": "string",
-              "example": "Web"
+              "type": "string"
             },
             "description": "It will return certain course with name that contain the keyword"
           },
@@ -1456,8 +1281,7 @@
             "name": "type",
             "in": "query",
             "schema": {
-              "type": "string",
-              "example": "Premium"
+              "type": "string"
             },
             "description": "It will return certain course with same type (Premium or Free)"
           }
@@ -1772,7 +1596,7 @@
                           "id": {
                             "type": "string",
                             "format": "uuid",
-                            "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
+                            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
                           },
                           "name": {
                             "type": "string",
@@ -1806,6 +1630,30 @@
                           "type": {
                             "type": "string",
                             "example": "premium"
+                          },
+                          "description": {
+                            "type": "string",
+                            "example": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat"
+                          },
+                          "telegram_group": {
+                            "type": "string",
+                            "example": "https://t.me/+CgHkE3Xy4Dk5ZWM9"
+                          },
+                          "on_boarding": {
+                            "type": "string",
+                            "example": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+                          },
+                          "introduction_video": {
+                            "type": "string",
+                            "example": "https://www.youtube.com/watch?v=xvFZjo5PgG0"
+                          },
+                          "total_chapter": {
+                            "type": "number",
+                            "example": 10
+                          },
+                          "total_duration": {
+                            "type": "number",
+                            "example": 120
                           }
                         }
                       }
@@ -2374,10 +2222,19 @@
                             "format": "uuid",
                             "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
                           },
-                          "course_id": {
-                            "type": "string",
-                            "format": "uuid",
-                            "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
+                          "course": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "format": "uuid",
+                                "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+                              },
+                              "name": {
+                                "type": "string",
+                                "example": "Web Development 101"
+                              }
+                            }
                           },
                           "name": {
                             "type": "string",
@@ -2391,6 +2248,10 @@
                           "is_locked": {
                             "type": "boolean",
                             "example": false
+                          },
+                          "total_module_duration": {
+                            "type": "integer",
+                            "example": 10
                           }
                         }
                       }
@@ -2922,10 +2783,19 @@
                           "format": "uuid",
                           "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
                         },
-                        "chapter_id": {
-                          "type": "string",
-                          "format": "uuid",
-                          "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
+                        "chapter": {
+                          "type": "object",
+                          "properties": {
+                            "id": {
+                              "type": "string",
+                              "format": "uuid",
+                              "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+                            },
+                            "name": {
+                              "type": "string",
+                              "example": "Introduction"
+                            }
+                          }
                         },
                         "index": {
                           "type": "number",
@@ -3037,10 +2907,19 @@
                             "format": "uuid",
                             "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
                           },
-                          "chpater_id": {
-                            "type": "string",
-                            "format": "uuid",
-                            "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
+                          "chapter": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "format": "uuid",
+                                "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+                              },
+                              "name": {
+                                "type": "string",
+                                "example": "Introduction"
+                              }
+                            }
                           },
                           "index": {
                             "type": "number",
@@ -3452,6 +3331,671 @@
                     "message": {
                       "type": "string",
                       "default": "Delete module success"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in client side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Client error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Forbidden"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in server side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Server Error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer_auth": []
+          }
+        ]
+      }
+    },
+    "/api/trackers/": {
+      "post": {
+        "tags": [
+          "User Tracker"
+        ],
+        "summary": "Create User Tracker",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "course_id": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Create user tracker data success"
+                    },
+                    "data": {
+                      "$ref": "#/components/schemas/User-Tracker"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in client side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Client error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Forbidden"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in server side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Server Error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer_auth": []
+          }
+        ]
+      },
+      "get": {
+        "tags": [
+          "User Tracker"
+        ],
+        "summary": "Get user tracker with course by user",
+        "description": "Get all Course by user id and their progress and filter it if there is query params",
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "filter to return certain course with newest (Paling Baru) or oldest (Promo) order"
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Category of course to return certain course"
+          },
+          {
+            "name": "level",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Level of course to return certain course"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It will return certain course with name that contain the keyword"
+          },
+          {
+            "name": "progress",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It will return certain course with same type (Selesai or In Progress)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get all Course by user id and their progress success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Get courses and progress success"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "format": "uuid",
+                            "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
+                          },
+                          "progress": {
+                            "type": "integer",
+                            "example": 10
+                          },
+                          "course": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "string",
+                                "format": "uuid",
+                                "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
+                              },
+                              "name": {
+                                "type": "string",
+                                "example": "Web Development 101"
+                              },
+                              "level": {
+                                "type": "string",
+                                "example": "Beginner"
+                              },
+                              "category": {
+                                "type": "object",
+                                "properties": {
+                                  "category": {
+                                    "type": "string",
+                                    "example": "Web Development"
+                                  },
+                                  "image": {
+                                    "type": "string",
+                                    "example": "https://urlis.net/image_category"
+                                  }
+                                }
+                              },
+                              "facilitator": {
+                                "type": "string",
+                                "example": "Harris s v"
+                              },
+                              "price": {
+                                "type": "number",
+                                "example": 7999999
+                              },
+                              "type": {
+                                "type": "string",
+                                "example": "premium"
+                              },
+                              "total_chapter": {
+                                "type": "number",
+                                "example": 10
+                              },
+                              "total_duration": {
+                                "type": "number",
+                                "example": 120
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in client side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Client error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Forbidden"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in server side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Server Error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer_auth": []
+          }
+        ]
+      }
+    },
+    "/api/trackers/{course_id}": {
+      "put": {
+        "tags": [
+          "User Tracker"
+        ],
+        "summary": "Update user tracker",
+        "description": "Update user tracker by their id",
+        "parameters": [
+          {
+            "name": "course_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "last_opened_chapter": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "last_opened_module": {
+                    "type": "integer",
+                    "example": 2
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Update user tracker success"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid",
+                          "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+                        },
+                        "last_opened_chapter": {
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "last_opened_module": {
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "total_modules_viewed": {
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "progress_course": {
+                          "type": "integer",
+                          "example": 0
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in client side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Client error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Forbidden"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in server side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Server Error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer_auth": []
+          }
+        ]
+      }
+    },
+    "/api/admin/counts": {
+      "get": {
+        "tags": [
+          "User Tracker"
+        ],
+        "summary": "Get data counts",
+        "description": "Get user, course, and premium course data counts",
+        "responses": {
+          "200": {
+            "description": "ok",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Get total data success"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "total_user": {
+                          "type": "number",
+                          "example": 420
+                        },
+                        "total_course": {
+                          "type": "number",
+                          "example": 420
+                        },
+                        "total_premium_course": {
+                          "type": "number",
+                          "example": 420
+                        }
+                      }
                     }
                   }
                 }
@@ -4261,139 +4805,6 @@
           }
         ]
       }
-    },
-    "/api/admin/data": {
-      "get": {
-        "tags": [
-          "Data Count"
-        ],
-        "summary": "Get data counts",
-        "description": "Get user, course, and premium course data counts",
-        "responses": {
-          "200": {
-            "description": "ok",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "OK"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Get data counts success"
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "users": {
-                          "type": "number",
-                          "example": 420
-                        },
-                        "courses": {
-                          "type": "number",
-                          "example": 420
-                        },
-                        "premium_courses": {
-                          "type": "number",
-                          "example": 420
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Error in client side",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "FAIL"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Client error"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "FAIL"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Unauthorized"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Forbidden Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "FAIL"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Forbidden"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Error in server side",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "FAIL"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Server Error"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "security": [
-          {
-            "bearer_auth": []
-          }
-        ]
-      }
     }
   },
   "components": {
@@ -4483,7 +4894,7 @@
           "id": {
             "type": "string",
             "format": "uuid",
-            "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
+            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
           },
           "name": {
             "type": "string",
@@ -4538,6 +4949,14 @@
             "type": "string",
             "example": "https://www.youtube.com/watch?v=xvFZjo5PgG0"
           },
+          "total_chapter": {
+            "type": "number",
+            "example": 10
+          },
+          "total_duration": {
+            "type": "number",
+            "example": 120
+          },
           "createdAt": {
             "type": "string",
             "format": "datetime",
@@ -4556,7 +4975,7 @@
           "id": {
             "type": "string",
             "format": "uuid",
-            "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
+            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
           },
           "category": {
             "type": "string",
@@ -4574,12 +4993,12 @@
           "id": {
             "type": "string",
             "format": "uuid",
-            "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
+            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
           },
           "course_id": {
             "type": "string",
             "format": "uuid",
-            "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
+            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
           },
           "name": {
             "type": "string",
@@ -4616,12 +5035,12 @@
           "id": {
             "type": "string",
             "format": "uuid",
-            "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
+            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
           },
           "chpater_id": {
             "type": "string",
             "format": "uuid",
-            "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
+            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
           },
           "name": {
             "type": "string",
@@ -4665,7 +5084,7 @@
           "category_id": {
             "type": "string",
             "format": "uuid",
-            "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
+            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
           },
           "facilitator": {
             "type": "string",
@@ -4703,7 +5122,7 @@
           "course_id": {
             "type": "string",
             "format": "uuid",
-            "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
+            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
           },
           "name": {
             "type": "string",
@@ -4718,7 +5137,7 @@
           "chapter_id": {
             "type": "string",
             "format": "uuid",
-            "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
+            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
           },
           "name": {
             "type": "string",
@@ -4740,7 +5159,7 @@
           "id": {
             "type": "string",
             "format": "uuid",
-            "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
+            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
           },
           "name": {
             "type": "string",
@@ -4837,12 +5256,21 @@
           "id": {
             "type": "string",
             "format": "uuid",
-            "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
+            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
           },
-          "course_id": {
-            "type": "string",
-            "format": "uuid",
-            "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
+          "course": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "uuid",
+                "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+              },
+              "name": {
+                "type": "string",
+                "example": "Web Development 101"
+              }
+            }
           },
           "name": {
             "type": "string",
@@ -4900,7 +5328,7 @@
             "id": {
               "type": "string",
               "format": "uuid",
-              "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
+              "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
             },
             "name": {
               "type": "string",
@@ -5167,6 +5595,78 @@
             "type": "string",
             "format": "datetime",
             "example": "2023-11-24T17:07:16.802Z"
+          }
+        }
+      },
+      "User-Tracker": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+          },
+          "user_id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+          },
+          "course_id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+          },
+          "last_opened_chapter": {
+            "type": "integer",
+            "example": 0
+          },
+          "last_opened_module": {
+            "type": "integer",
+            "example": 0
+          },
+          "total_modules_viewed": {
+            "type": "integer",
+            "example": 0
+          },
+          "progress_course": {
+            "type": "integer",
+            "example": 0
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "datetime",
+            "example": "2023-11-24T17:07:16.802Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "datetime",
+            "example": "2023-11-24T17:07:16.802Z"
+          }
+        }
+      },
+      "User-Tracker-Detail": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+          },
+          "last_opened_chapter": {
+            "type": "integer",
+            "example": 1
+          },
+          "last_opened_module": {
+            "type": "integer",
+            "example": 1
+          },
+          "total_modules_viewed": {
+            "type": "integer",
+            "example": 1
+          },
+          "progress_course": {
+            "type": "integer",
+            "example": 10
           }
         }
       }
