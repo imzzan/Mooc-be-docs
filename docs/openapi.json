@@ -1303,7 +1303,58 @@
                       "default": "Get all courses success"
                     },
                     "data": {
-                      "$ref": "#/components/schemas/Course-Card"
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "format": "uuid",
+                            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+                          },
+                          "name": {
+                            "type": "string",
+                            "example": "Web Development 101"
+                          },
+                          "level": {
+                            "type": "string",
+                            "example": "Beginner"
+                          },
+                          "category": {
+                            "type": "object",
+                            "properties": {
+                              "category": {
+                                "type": "string",
+                                "example": "Web Development"
+                              },
+                              "image": {
+                                "type": "string",
+                                "example": "https://urlis.net/image_category"
+                              }
+                            }
+                          },
+                          "facilitator": {
+                            "type": "string",
+                            "example": "Harris s v"
+                          },
+                          "price": {
+                            "type": "number",
+                            "example": 7999999
+                          },
+                          "type": {
+                            "type": "string",
+                            "example": "premium"
+                          },
+                          "total_chapter": {
+                            "type": "number",
+                            "example": 10
+                          },
+                          "total_duration": {
+                            "type": "number",
+                            "example": 120
+                          }
+                        }
+                      }
                     }
                   }
                 }
@@ -4311,7 +4362,49 @@
                       "default": "Create order success"
                     },
                     "data": {
-                      "$ref": "#/components/schemas/Order-before-Payment"
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid",
+                          "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+                        },
+                        "user_id": {
+                          "type": "string",
+                          "format": "uuid",
+                          "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+                        },
+                        "course_id": {
+                          "type": "string",
+                          "format": "uuid",
+                          "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+                        },
+                        "status": {
+                          "type": "string",
+                          "default": "BELUM BAYAR"
+                        },
+                        "order_method": {
+                          "type": "string",
+                          "nullable": true,
+                          "default": null
+                        },
+                        "payment_date": {
+                          "type": "string",
+                          "format": "datetime",
+                          "nullable": true,
+                          "default": null
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "datetime",
+                          "example": "2023-11-24T17:07:16.802Z"
+                        },
+                        "updatedAt": {
+                          "type": "string",
+                          "format": "datetime",
+                          "example": "2023-11-24T17:07:16.802Z"
+                        }
+                      }
                     }
                   }
                 }
@@ -4462,7 +4555,49 @@
                       "default": "Update order success"
                     },
                     "data": {
-                      "$ref": "#/components/schemas/Order-after-Payment"
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid",
+                          "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+                        },
+                        "user_id": {
+                          "type": "string",
+                          "format": "uuid",
+                          "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+                        },
+                        "course_id": {
+                          "type": "string",
+                          "format": "uuid",
+                          "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+                        },
+                        "status": {
+                          "type": "string",
+                          "example": "SUDAH BAYAR"
+                        },
+                        "order_method": {
+                          "type": "string",
+                          "nullable": true,
+                          "example": "Credit Cars"
+                        },
+                        "payment_date": {
+                          "type": "string",
+                          "format": "datetime",
+                          "nullable": true,
+                          "example": "2023-11-24T17:07:16.802Z"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "datetime",
+                          "example": "2023-11-24T17:07:16.802Z"
+                        },
+                        "updatedAt": {
+                          "type": "string",
+                          "format": "datetime",
+                          "example": "2023-11-24T17:07:16.802Z"
+                        }
+                      }
                     }
                   }
                 }
@@ -4888,6 +5023,24 @@
           }
         }
       },
+      "Category": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+          },
+          "category": {
+            "type": "string",
+            "example": "Web Development"
+          },
+          "image": {
+            "type": "string",
+            "example": "https://urlis.net/image_category"
+          }
+        }
+      },
       "Course": {
         "type": "object",
         "properties": {
@@ -4969,103 +5122,6 @@
           }
         }
       },
-      "Category": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid",
-            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
-          },
-          "category": {
-            "type": "string",
-            "example": "Web Development"
-          },
-          "image": {
-            "type": "string",
-            "example": "https://urlis.net/image_category"
-          }
-        }
-      },
-      "Chapter": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid",
-            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
-          },
-          "course_id": {
-            "type": "string",
-            "format": "uuid",
-            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
-          },
-          "name": {
-            "type": "string",
-            "format": "uuid",
-            "example": "introduction"
-          },
-          "index": {
-            "type": "integer",
-            "example": 1
-          },
-          "total_module_duration": {
-            "type": "number",
-            "example": 420
-          },
-          "is_locked": {
-            "type": "boolean",
-            "example": false
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "datetime",
-            "example": "2023-11-24T17:07:16.802Z"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "datetime",
-            "example": "2023-11-24T17:07:16.802Z"
-          }
-        }
-      },
-      "Module": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid",
-            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
-          },
-          "chpater_id": {
-            "type": "string",
-            "format": "uuid",
-            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
-          },
-          "name": {
-            "type": "string",
-            "example": "programming introduction"
-          },
-          "video": {
-            "type": "string",
-            "example": "https://www.youtube.com/watch?v=xvFZjo5PgG0"
-          },
-          "duration": {
-            "type": "number",
-            "example": 10
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "datetime",
-            "example": "2023-11-24T17:07:16.802Z"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "datetime",
-            "example": "2023-11-24T17:07:16.802Z"
-          }
-        }
-      },
       "Course-Input": {
         "type": "object",
         "properties": {
@@ -5113,43 +5169,6 @@
           "introduction_video": {
             "type": "string",
             "example": "https://www.youtube.com/watch?v=xvFZjo5PgG0"
-          }
-        }
-      },
-      "Chapter-Input": {
-        "type": "object",
-        "properties": {
-          "course_id": {
-            "type": "string",
-            "format": "uuid",
-            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
-          },
-          "name": {
-            "type": "string",
-            "format": "uuid",
-            "example": "introduction"
-          }
-        }
-      },
-      "Module-Input": {
-        "type": "object",
-        "properties": {
-          "chapter_id": {
-            "type": "string",
-            "format": "uuid",
-            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
-          },
-          "name": {
-            "type": "string",
-            "example": "programming introduction"
-          },
-          "video": {
-            "type": "string",
-            "example": "https://www.youtube.com/watch?v=xvFZjo5PgG0"
-          },
-          "duration": {
-            "type": "number",
-            "example": 10
           }
         }
       },
@@ -5250,6 +5269,63 @@
           }
         }
       },
+      "Chapter": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+          },
+          "course_id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+          },
+          "name": {
+            "type": "string",
+            "format": "uuid",
+            "example": "introduction"
+          },
+          "index": {
+            "type": "integer",
+            "example": 1
+          },
+          "total_module_duration": {
+            "type": "number",
+            "example": 420
+          },
+          "is_locked": {
+            "type": "boolean",
+            "example": false
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "datetime",
+            "example": "2023-11-24T17:07:16.802Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "datetime",
+            "example": "2023-11-24T17:07:16.802Z"
+          }
+        }
+      },
+      "Chapter-Input": {
+        "type": "object",
+        "properties": {
+          "course_id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+          },
+          "name": {
+            "type": "string",
+            "format": "uuid",
+            "example": "introduction"
+          }
+        }
+      },
       "Chapter-Details": {
         "type": "object",
         "properties": {
@@ -5320,57 +5396,62 @@
           }
         }
       },
-      "Course-Card": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "format": "uuid",
-              "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
-            },
-            "name": {
-              "type": "string",
-              "example": "Web Development 101"
-            },
-            "level": {
-              "type": "string",
-              "example": "Beginner"
-            },
-            "category": {
-              "type": "object",
-              "properties": {
-                "category": {
-                  "type": "string",
-                  "example": "Web Development"
-                },
-                "image": {
-                  "type": "string",
-                  "example": "https://urlis.net/image_category"
-                }
-              }
-            },
-            "facilitator": {
-              "type": "string",
-              "example": "Harris s v"
-            },
-            "price": {
-              "type": "number",
-              "example": 7999999
-            },
-            "type": {
-              "type": "string",
-              "example": "premium"
-            },
-            "total_chapter": {
-              "type": "number",
-              "example": 10
-            },
-            "total_duration": {
-              "type": "number",
-              "example": 120
-            }
+      "Module": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+          },
+          "chpater_id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+          },
+          "name": {
+            "type": "string",
+            "example": "programming introduction"
+          },
+          "video": {
+            "type": "string",
+            "example": "https://www.youtube.com/watch?v=xvFZjo5PgG0"
+          },
+          "duration": {
+            "type": "number",
+            "example": 10
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "datetime",
+            "example": "2023-11-24T17:07:16.802Z"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "datetime",
+            "example": "2023-11-24T17:07:16.802Z"
+          }
+        }
+      },
+      "Module-Input": {
+        "type": "object",
+        "properties": {
+          "chapter_id": {
+            "type": "string",
+            "format": "uuid",
+            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+          },
+          "name": {
+            "type": "string",
+            "example": "programming introduction"
+          },
+          "video": {
+            "type": "string",
+            "example": "https://www.youtube.com/watch?v=xvFZjo5PgG0"
+          },
+          "duration": {
+            "type": "number",
+            "example": 10
           }
         }
       },
@@ -5432,96 +5513,6 @@
             "type": "string",
             "format": "datetime",
             "nullable": true,
-            "example": "2023-11-24T17:07:16.802Z"
-          }
-        }
-      },
-      "Order-before-Payment": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid",
-            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
-          },
-          "user_id": {
-            "type": "string",
-            "format": "uuid",
-            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
-          },
-          "course_id": {
-            "type": "string",
-            "format": "uuid",
-            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
-          },
-          "status": {
-            "type": "string",
-            "default": "BELUM BAYAR"
-          },
-          "order_method": {
-            "type": "string",
-            "nullable": true,
-            "default": null
-          },
-          "payment_date": {
-            "type": "string",
-            "format": "datetime",
-            "nullable": true,
-            "default": null
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "datetime",
-            "example": "2023-11-24T17:07:16.802Z"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "datetime",
-            "example": "2023-11-24T17:07:16.802Z"
-          }
-        }
-      },
-      "Order-after-Payment": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "format": "uuid",
-            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
-          },
-          "user_id": {
-            "type": "string",
-            "format": "uuid",
-            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
-          },
-          "course_id": {
-            "type": "string",
-            "format": "uuid",
-            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
-          },
-          "status": {
-            "type": "string",
-            "example": "SUDAH BAYAR"
-          },
-          "order_method": {
-            "type": "string",
-            "nullable": true,
-            "example": "Credit Cars"
-          },
-          "payment_date": {
-            "type": "string",
-            "format": "datetime",
-            "nullable": true,
-            "example": "2023-11-24T17:07:16.802Z"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "datetime",
-            "example": "2023-11-24T17:07:16.802Z"
-          },
-          "updatedAt": {
-            "type": "string",
-            "format": "datetime",
             "example": "2023-11-24T17:07:16.802Z"
           }
         }
