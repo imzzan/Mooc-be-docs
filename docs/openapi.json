@@ -2,7 +2,7 @@
   "openapi": "3.0.2",
   "info": {
     "title": "Dev Academy",
-    "description": "Dev Academy adalah sebuah platform belajar online yang menyediakankursus online dalam bidang teknologi\n\ncontact:\n  - devacademy@gmail.com",
+    "description": "Dev Academy is an online learning platform that offers technology courses.\n\ncontact:\n  - devacademy@gmail.com",
     "version": "1.0"
   },
   "servers": [
@@ -1267,7 +1267,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Level of course to return certain course"
+            "description": "Level of course (Beginner), (Intermediate), and (Advanced) to return certain course"
           },
           {
             "name": "name",
@@ -3588,7 +3588,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Level of course to return certain course"
+            "description": "Level of course (Beginner), (Intermediate), and (Advanced) to return certain course"
           },
           {
             "name": "name",
