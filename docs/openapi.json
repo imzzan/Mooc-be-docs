@@ -4529,7 +4529,7 @@
                     "format": "uuid",
                     "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
                   },
-                  "ordder_method": {
+                  "order_method": {
                     "type": "string",
                     "example": "Credit Card"
                   }
