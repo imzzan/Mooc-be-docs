@@ -46,6 +46,10 @@
     {
       "name": "Order",
       "description": "End Point about Order management"
+    },
+    {
+      "name": "Notification",
+      "description": "End Point about Notifications"
     }
   ],
   "paths": {
@@ -4940,6 +4944,223 @@
           }
         ]
       }
+    },
+    "/api/notifications": {
+      "get": {
+        "tags": [
+          "Notification"
+        ],
+        "summary": "Get all notifications by user",
+        "description": "Get all notifications by user",
+        "responses": {
+          "200": {
+            "description": "Get all notifications success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "string",
+                        "example": "9571cb11-5523-4a0b-85c1-8231d78a783"
+                      },
+                      "title": {
+                        "type": "string",
+                        "example": "Notifikasi"
+                      },
+                      "message": {
+                        "type": "string",
+                        "example": "Selamat pembelian course telah berhasil"
+                      },
+                      "additional_message": {
+                        "type": "string",
+                        "example": null
+                      },
+                      "is_readed": {
+                        "type": "boolean",
+                        "example": false
+                      },
+                      "date_notif": {
+                        "type": "string",
+                        "example": "2023-12-20T15:42:31.898Z"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in client side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Client error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Forbidden"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in server side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Server Error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer_auth": []
+          }
+        ]
+      }
+    },
+    "/api/notifications/{notif_id}": {
+      "put": {
+        "tags": [
+          "Notification"
+        ],
+        "summary": "Update Notification",
+        "description": "Update Notification",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Update notificatin success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Notification already readed"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in client side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Client error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in server side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "default": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "default": "Server Error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -5658,6 +5879,39 @@
           "progress_course": {
             "type": "integer",
             "example": 10
+          }
+        }
+      },
+      "Notification": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "example": "9571cb11-5523-4a0b-85c1-8231d78a783"
+          },
+          "user_id": {
+            "type": "string",
+            "example": "9571cb11-5523-4a0b-85c1-8231d78a783"
+          },
+          "title": {
+            "type": "string",
+            "example": "Notifikasi"
+          },
+          "message": {
+            "type": "string",
+            "example": "Selamat pembelian course telah berhasil"
+          },
+          "additional_message": {
+            "type": "string",
+            "example": null
+          },
+          "is_readed": {
+            "type": "boolean",
+            "example": false
+          },
+          "date_notif": {
+            "type": "string",
+            "example": "2023-12-20T15:42:31.898Z"
           }
         }
       }
