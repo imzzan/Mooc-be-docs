@@ -5804,46 +5804,7 @@
         "description": "Get all notifications by user",
         "responses": {
           "200": {
-            "description": "Get all notifications success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "string",
-                        "example": "9571cb11-5523-4a0b-85c1-8231d78a783"
-                      },
-                      "title": {
-                        "type": "string",
-                        "example": "Notifikasi"
-                      },
-                      "message": {
-                        "type": "string",
-                        "example": "Selamat pembelian course telah berhasil"
-                      },
-                      "additional_message": {
-                        "type": "string",
-                        "example": null
-                      },
-                      "is_readed": {
-                        "type": "boolean",
-                        "example": false
-                      },
-                      "date_notif": {
-                        "type": "string",
-                        "example": "2023-12-20T15:42:31.898Z"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Error in client side",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -5851,11 +5812,43 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "OK"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Client error"
+                      "example": "Get all notifications success"
+                    },
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "example": "9571cb11-5523-4a0b-85c1-8231d78a783"
+                          },
+                          "title": {
+                            "type": "string",
+                            "example": "Notifikasi"
+                          },
+                          "message": {
+                            "type": "string",
+                            "example": "Selamat pembelian course telah berhasil"
+                          },
+                          "additional_message": {
+                            "type": "string",
+                            "example": null
+                          },
+                          "is_readed": {
+                            "type": "boolean",
+                            "example": false
+                          },
+                          "date_notif": {
+                            "type": "string",
+                            "example": "2023-12-20T15:42:31.898Z"
+                          }
+                        }
+                      }
                     }
                   }
                 }
@@ -5882,8 +5875,8 @@
               }
             }
           },
-          "403": {
-            "description": "Forbidden Request",
+          "429": {
+            "description": "Too many request",
             "content": {
               "application/json": {
                 "schema": {
@@ -5891,11 +5884,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Forbidden"
+                      "example": "Too many requests, please try again later"
                     }
                   }
                 }
@@ -5911,11 +5904,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Server Error"
+                      "example": "Internal server error"
                     }
                   }
                 }
@@ -5939,7 +5932,7 @@
         "description": "Update Notification",
         "parameters": [
           {
-            "name": "id",
+            "name": "notif_id",
             "in": "path",
             "required": true,
             "schema": {
@@ -5950,7 +5943,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Update notificatin success",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
@@ -5978,11 +5971,71 @@
                   "properties": {
                     "status": {
                       "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Client error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
                       "default": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Client error"
+                      "default": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Notif Id not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Too many requests, please try again later"
                     }
                   }
                 }
@@ -5998,18 +6051,23 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Server Error"
+                      "example": "Internal server error"
                     }
                   }
                 }
               }
             }
           }
-        }
+        },
+        "security": [
+          {
+            "bearer_auth": []
+          }
+        ]
       }
     }
   },
