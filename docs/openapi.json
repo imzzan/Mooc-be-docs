@@ -16,6 +16,10 @@
   },
   "tags": [
     {
+      "name": "Ping",
+      "description": "End point to check connection to API"
+    },
+    {
       "name": "Authentication",
       "description": "End point about Authentication"
     },
@@ -53,6 +57,97 @@
     }
   ],
   "paths": {
+    "/api": {
+      "get": {
+        "tags": [
+          "Ping"
+        ],
+        "summary": "Ping to API",
+        "description": "Ping to API",
+        "responses": {
+          "200": {
+            "description": "Suceess",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "DevAcademy API is up and running"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "End point not found or worng method"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Too many requests, please try again later"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in server side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Internal server error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/register": {
       "post": {
         "tags": [
@@ -99,11 +194,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "OK"
+                      "example": "OK"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Email sent"
+                      "example": "Email sent"
                     }
                   }
                 }
@@ -118,20 +213,32 @@
                   "type": "object",
                   "properties": {
                     "status": {
-                      "type": "string",
-                      "default": "FAIL"
+                      "type": "string"
                     },
                     "message": {
-                      "type": "string",
-                      "default": "User has been registered or Client error"
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Same Email": {
+                    "value": {
+                      "status": "FAIL",
+                      "message": "Email has been registered"
+                    }
+                  },
+                  "Password Incorect": {
+                    "value": {
+                      "status": "FAIL",
+                      "message": "Password must be at least 8 character"
                     }
                   }
                 }
               }
             }
           },
-          "401": {
-            "description": "Password incorrect",
+          "429": {
+            "description": "Too Many Request",
             "content": {
               "application/json": {
                 "schema": {
@@ -139,11 +246,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Password incorrect"
+                      "example": "Too many requests, please try again later"
                     }
                   }
                 }
@@ -159,11 +266,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Server Error"
+                      "example": "Internal server error"
                     }
                   }
                 }
@@ -194,7 +301,7 @@
                   },
                   "password": {
                     "type": "string",
-                    "default": "jhonsmith123"
+                    "default": "jhon0000"
                   }
                 }
               }
@@ -203,7 +310,7 @@
         },
         "responses": {
           "200": {
-            "description": "User successfully login",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
@@ -211,11 +318,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "OK"
+                      "example": "OK"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Login success"
+                      "example": "Login success"
                     },
                     "data": {
                       "type": "object",
@@ -231,7 +338,7 @@
               }
             }
           },
-          "404": {
+          "400": {
             "description": "Error in client side",
             "content": {
               "application/json": {
@@ -240,19 +347,19 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Email user not found"
+                      "example": "Wrong Password"
                     }
                   }
                 }
               }
             }
           },
-          "500": {
-            "description": "Error in Ssrver",
+          "404": {
+            "description": "Not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -260,11 +367,51 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Server Error"
+                      "example": "User not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Too many requests, please try again later"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in server side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Internal server error"
                     }
                   }
                 }
@@ -304,7 +451,7 @@
         },
         "responses": {
           "200": {
-            "description": "User successfully login",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
@@ -312,11 +459,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "OK"
+                      "example": "OK"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Login success"
+                      "example": "Login success"
                     },
                     "data": {
                       "type": "object",
@@ -332,7 +479,7 @@
               }
             }
           },
-          "404": {
+          "400": {
             "description": "Error in client side",
             "content": {
               "application/json": {
@@ -341,19 +488,19 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Email user not found"
+                      "example": "Wrong Password"
                     }
                   }
                 }
               }
             }
           },
-          "500": {
-            "description": "Error in Ssrver",
+          "404": {
+            "description": "Not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -361,11 +508,279 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Server Error"
+                      "example": "Id not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Too many requests, please try again later"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in server side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Internal server error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/reset/password": {
+      "post": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Send email link reset password",
+        "description": "send email link reset password",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "default": "jhon123@gmail.com"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Email sent"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Email user not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Too many requests, please try again later"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in server side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Internal server error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/reset/password/{tokenResetPassword}": {
+      "put": {
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Reset password",
+        "description": "Reset Password",
+        "parameters": [
+          {
+            "name": "tokenResetPassword",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "new_password": {
+                    "type": "string",
+                    "example": "jhonsmith123"
+                  },
+                  "confirm_password": {
+                    "type": "string",
+                    "example": "jhonsmith123"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Reset password success"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in client side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Wrong password"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Too many requests, please try again later"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in server side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Internal server error"
                     }
                   }
                 }
@@ -384,7 +799,7 @@
         "description": "Get User Profile by jwt",
         "responses": {
           "200": {
-            "description": "Get user detail success",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
@@ -437,26 +852,6 @@
               }
             }
           },
-          "400": {
-            "description": "Error in client side",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "FAIL"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "User has been registered or Client error"
-                    }
-                  }
-                }
-              }
-            }
-          },
           "401": {
             "description": "Unauthorized",
             "content": {
@@ -466,11 +861,31 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Unauthorized"
+                      "example": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Too many requests, please try again later"
                     }
                   }
                 }
@@ -486,11 +901,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Server Error"
+                      "example": "Internal server error"
                     }
                   }
                 }
@@ -549,7 +964,7 @@
         },
         "responses": {
           "201": {
-            "description": "User successfully Updated",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
@@ -557,11 +972,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "OK"
+                      "example": "OK"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Update user success"
+                      "example": "Update user success"
                     },
                     "data": {
                       "type": "object",
@@ -607,11 +1022,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "User has been registered or Client error"
+                      "example": "Client error"
                     }
                   }
                 }
@@ -627,11 +1042,31 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Unauthorized"
+                      "example": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Too many requests, please try again later"
                     }
                   }
                 }
@@ -647,11 +1082,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Server Error"
+                      "example": "Internal server error"
                     }
                   }
                 }
@@ -664,194 +1099,6 @@
             "bearer_auth": []
           }
         ]
-      }
-    },
-    "/api/reset/password": {
-      "post": {
-        "tags": [
-          "Authentication"
-        ],
-        "summary": "Send email link reset password",
-        "description": "send email link reset password",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "email": {
-                    "type": "string",
-                    "default": "jhon123@gmail.com"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Reset password",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "OK"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Email sent"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Error in client side",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "FAIL"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Email user not found"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Error in Ssrver",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "FAIL"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Server Error"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/reset/password/{tokenResetPassword}": {
-      "put": {
-        "tags": [
-          "Authentication"
-        ],
-        "summary": "Reset password",
-        "description": "Reset Password",
-        "parameters": [
-          {
-            "name": "tokenResetPassword",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "new_password": {
-                    "type": "string",
-                    "default": "jhonsmith123"
-                  },
-                  "confirm_password": {
-                    "type": "string",
-                    "default": "jhonsmith123"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Reset password",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "OK"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Reset password success"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Error in client side",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "FAIL"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Email user not found"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Error in Ssrver",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "FAIL"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Server Error"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
       }
     },
     "/api/user/password": {
@@ -870,16 +1117,16 @@
                 "properties": {
                   "old_password": {
                     "type": "string",
-                    "default": "jhonsmith123",
+                    "example": "jhonsmith123",
                     "uniqueItems": true
                   },
                   "new_password": {
                     "type": "string",
-                    "default": "aku ganteng"
+                    "example": "aku ganteng"
                   },
                   "confirm_password": {
                     "type": "string",
-                    "default": "aku ganteng"
+                    "example": "aku ganteng"
                   }
                 }
               }
@@ -888,7 +1135,7 @@
         },
         "responses": {
           "200": {
-            "description": "User Successfully changed password",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
@@ -896,11 +1143,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "OK"
+                      "example": "OK"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Update password success"
+                      "example": "Update password success"
                     }
                   }
                 }
@@ -915,12 +1162,24 @@
                   "type": "object",
                   "properties": {
                     "status": {
-                      "type": "string",
-                      "default": "FAIL"
+                      "type": "string"
                     },
                     "message": {
-                      "type": "string",
-                      "default": "Client Error"
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Wrong old password": {
+                    "value": {
+                      "status": "FAIL",
+                      "message": "Old password wrong"
+                    }
+                  },
+                  "Wrong new password": {
+                    "value": {
+                      "status": "FAIL",
+                      "message": "New password wrong"
                     }
                   }
                 }
@@ -936,11 +1195,31 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Unauthorized"
+                      "example": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Too many requests, please try again later"
                     }
                   }
                 }
@@ -956,11 +1235,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Server Error"
+                      "example": "Internal server error"
                     }
                   }
                 }
@@ -984,7 +1263,7 @@
         "description": "Send code otp for Verification",
         "responses": {
           "200": {
-            "description": "Email successfully delivered",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
@@ -992,31 +1271,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "OK"
+                      "example": "OK"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Email sent"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Error in client side",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "FAIL"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Client error"
+                      "example": "Email sent"
                     }
                   }
                 }
@@ -1032,19 +1291,19 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Unauthorized"
+                      "example": "Unauthorized"
                     }
                   }
                 }
               }
             }
           },
-          "403": {
-            "description": "Forbidden Request",
+          "429": {
+            "description": "Too many request",
             "content": {
               "application/json": {
                 "schema": {
@@ -1052,11 +1311,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Forbidden"
+                      "example": "Too many requests, please try again later"
                     }
                   }
                 }
@@ -1072,11 +1331,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Server Error"
+                      "example": "Internal server error"
                     }
                   }
                 }
@@ -1105,27 +1364,27 @@
                 "properties": {
                   "code1": {
                     "type": "string",
-                    "default": 5
+                    "example": 5
                   },
                   "code2": {
                     "type": "string",
-                    "default": 3
+                    "example": 3
                   },
                   "code3": {
                     "type": "string",
-                    "default": 6
+                    "example": 6
                   },
                   "code4": {
                     "type": "string",
-                    "default": 7
+                    "example": 7
                   },
                   "code5": {
                     "type": "string",
-                    "default": 4
+                    "example": 4
                   },
                   "code6": {
                     "type": "string",
-                    "default": 3
+                    "example": 3
                   }
                 }
               }
@@ -1134,7 +1393,7 @@
         },
         "responses": {
           "200": {
-            "description": "Success confirm otp",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
@@ -1153,26 +1412,6 @@
               }
             }
           },
-          "400": {
-            "description": "Error in client side",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "FAIL"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Client error"
-                    }
-                  }
-                }
-              }
-            }
-          },
           "401": {
             "description": "Unauthorized",
             "content": {
@@ -1182,19 +1421,19 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Unauthorized"
+                      "example": "Unauthorized"
                     }
                   }
                 }
               }
             }
           },
-          "403": {
-            "description": "Forbidden Request",
+          "429": {
+            "description": "Too many request",
             "content": {
               "application/json": {
                 "schema": {
@@ -1202,11 +1441,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Forbidden"
+                      "example": "Too many requests, please try again later"
                     }
                   }
                 }
@@ -1222,11 +1461,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Server Error"
+                      "example": "Internal server error"
                     }
                   }
                 }
@@ -1292,7 +1531,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Get all course successfully",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
@@ -1300,11 +1539,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "OK"
+                      "example": "OK"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Get all courses success"
+                      "example": "Get all courses success"
                     },
                     "data": {
                       "type": "array",
@@ -1374,11 +1613,31 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Client error"
+                      "example": "Client error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Too many requests, please try again later"
                     }
                   }
                 }
@@ -1394,11 +1653,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Server Error"
+                      "example": "Internal server error"
                     }
                   }
                 }
@@ -1414,7 +1673,7 @@
           "Course"
         ],
         "summary": "Detail Course",
-        "description": "Get Course by their id and their modules in it",
+        "description": "Get Course by their id and their modules in it, if there is jwt and tracked course, locked chapter in premium course will unlocked",
         "parameters": [
           {
             "name": "id",
@@ -1428,7 +1687,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Get Course success",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
@@ -1436,11 +1695,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "OK"
+                      "example": "OK"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Get detail course success"
+                      "example": "Get detail course success"
                     },
                     "data": {
                       "$ref": "#/components/schemas/Course-Details"
@@ -1450,8 +1709,8 @@
               }
             }
           },
-          "400": {
-            "description": "Error in client side",
+          "404": {
+            "description": "Not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -1459,11 +1718,31 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Client error"
+                      "example": "Course Id not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Too many requests, please try again later"
                     }
                   }
                 }
@@ -1479,11 +1758,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Server Error"
+                      "example": "Internal server error"
                     }
                   }
                 }
@@ -1512,7 +1791,7 @@
         },
         "responses": {
           "201": {
-            "description": "Created new course success",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
@@ -1520,11 +1799,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "OK"
+                      "example": "OK"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Create course success"
+                      "example": "Create course success"
                     },
                     "data": {
                       "$ref": "#/components/schemas/Course"
@@ -1543,11 +1822,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Client error"
+                      "example": "Client error"
                     }
                   }
                 }
@@ -1575,7 +1854,7 @@
             }
           },
           "403": {
-            "description": "Forbidden Request",
+            "description": "Forbidden",
             "content": {
               "application/json": {
                 "schema": {
@@ -1583,11 +1862,31 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Forbidden"
+                      "example": "Forbidden"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Too many requests, please try again later"
                     }
                   }
                 }
@@ -1603,11 +1902,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Server Error"
+                      "example": "Internal server error"
                     }
                   }
                 }
@@ -1626,10 +1925,52 @@
           "Course"
         ],
         "summary": "Get all Courses",
-        "description": "Get all Courses",
+        "description": "Get all course available with simplified information and filter it if there is query params",
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "filter to return certain course with newest (Paling Baru) or oldest (Promo) order"
+          },
+          {
+            "name": "category",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Category of course to return certain course"
+          },
+          {
+            "name": "level",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "Level of course (Beginner), (Intermediate), and (Advanced) to return certain course"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It will return certain course with name that contain the keyword"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It will return certain course with same type (Premium or Free)"
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Get all course success",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
@@ -1637,11 +1978,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "OK"
+                      "example": "OK"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Get all courses success"
+                      "example": "Get all courses success"
                     },
                     "data": {
                       "type": "array",
@@ -1727,11 +2068,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Client error"
+                      "example": "Client error"
                     }
                   }
                 }
@@ -1759,7 +2100,7 @@
             }
           },
           "403": {
-            "description": "Forbidden Request",
+            "description": "Forbidden",
             "content": {
               "application/json": {
                 "schema": {
@@ -1767,11 +2108,31 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Forbidden"
+                      "example": "Forbidden"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Too many requests, please try again later"
                     }
                   }
                 }
@@ -1787,11 +2148,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Server Error"
+                      "example": "Internal server error"
                     }
                   }
                 }
@@ -1836,7 +2197,7 @@
         },
         "responses": {
           "201": {
-            "description": "success updating course",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
@@ -1844,11 +2205,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "OK"
+                      "example": "OK"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Update course success"
+                      "example": "Update course success"
                     },
                     "data": {
                       "$ref": "#/components/schemas/Course"
@@ -1867,11 +2228,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Client error"
+                      "example": "Client error"
                     }
                   }
                 }
@@ -1899,7 +2260,7 @@
             }
           },
           "403": {
-            "description": "Forbidden Request",
+            "description": "Forbidden",
             "content": {
               "application/json": {
                 "schema": {
@@ -1907,11 +2268,51 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Forbidden"
+                      "example": "Forbidden"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Course Id not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Too many requests, please try again later"
                     }
                   }
                 }
@@ -1927,11 +2328,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Server Error"
+                      "example": "Internal server error"
                     }
                   }
                 }
@@ -1964,7 +2365,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Course deleting success",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
@@ -1972,31 +2373,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "OK"
+                      "example": "OK"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Delete course success"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Error in client side",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "FAIL"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Client error"
+                      "example": "Delete course success"
                     }
                   }
                 }
@@ -2024,7 +2405,7 @@
             }
           },
           "403": {
-            "description": "Forbidden Request",
+            "description": "Forbidden",
             "content": {
               "application/json": {
                 "schema": {
@@ -2032,11 +2413,51 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Forbidden"
+                      "example": "Forbidden"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Course Id not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Too many requests, please try again later"
                     }
                   }
                 }
@@ -2052,11 +2473,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Server Error"
+                      "example": "Internal server error"
                     }
                   }
                 }
@@ -2080,7 +2501,7 @@
         "description": "Get all categories",
         "responses": {
           "200": {
-            "description": "Getting all categories success",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
@@ -2088,11 +2509,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "OK"
+                      "example": "OK"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Get categories data success"
+                      "example": "Get categories data success"
                     },
                     "data": {
                       "type": "array",
@@ -2105,8 +2526,8 @@
               }
             }
           },
-          "400": {
-            "description": "Error in client side",
+          "429": {
+            "description": "Too many request",
             "content": {
               "application/json": {
                 "schema": {
@@ -2114,11 +2535,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Client error"
+                      "example": "Too many requests, please try again later"
                     }
                   }
                 }
@@ -2134,11 +2555,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Server Error"
+                      "example": "Internal server error"
                     }
                   }
                 }
@@ -2154,7 +2575,7 @@
           "Chapter"
         ],
         "summary": "Get Chapter detail",
-        "description": "Get Chapter detail with their modules",
+        "description": "Get Chapter detail with their modules, if there is jwt and tracked course, locked chapter in premium course will unlocked",
         "parameters": [
           {
             "name": "chapter_id",
@@ -2168,7 +2589,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ok",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
@@ -2176,11 +2597,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "OK"
+                      "example": "OK"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Get detail chapter success"
+                      "example": "Get detail chapter success"
                     },
                     "data": {
                       "$ref": "#/components/schemas/Chapter-Details"
@@ -2190,8 +2611,8 @@
               }
             }
           },
-          "400": {
-            "description": "Error in client side",
+          "404": {
+            "description": "Not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -2199,11 +2620,31 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Client error"
+                      "example": "Chapter Id not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Too many requests, please try again later"
                     }
                   }
                 }
@@ -2219,11 +2660,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Server Error"
+                      "example": "Internal server error"
                     }
                   }
                 }
@@ -2253,7 +2694,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ok",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
@@ -2261,11 +2702,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "OK"
+                      "example": "OK"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Get all chapters success"
+                      "example": "Get all chapters success"
                     },
                     "data": {
                       "type": "array",
@@ -2316,26 +2757,6 @@
               }
             }
           },
-          "400": {
-            "description": "Error in client side",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "FAIL"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Client error"
-                    }
-                  }
-                }
-              }
-            }
-          },
           "401": {
             "description": "Unauthorized",
             "content": {
@@ -2357,7 +2778,7 @@
             }
           },
           "403": {
-            "description": "Forbidden Request",
+            "description": "Forbidden",
             "content": {
               "application/json": {
                 "schema": {
@@ -2365,11 +2786,51 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Forbidden"
+                      "example": "Forbidden"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Course Id not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Too many requests, please try again later"
                     }
                   }
                 }
@@ -2385,11 +2846,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Server Error"
+                      "example": "Internal server error"
                     }
                   }
                 }
@@ -2421,7 +2882,7 @@
         },
         "responses": {
           "201": {
-            "description": "ok",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
@@ -2429,11 +2890,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "OK"
+                      "example": "OK"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Create chapter success"
+                      "example": "Create chapter success"
                     },
                     "data": {
                       "$ref": "#/components/schemas/Chapter"
@@ -2452,11 +2913,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Client error"
+                      "example": "Client error"
                     }
                   }
                 }
@@ -2484,7 +2945,7 @@
             }
           },
           "403": {
-            "description": "Forbidden Request",
+            "description": "Forbidden",
             "content": {
               "application/json": {
                 "schema": {
@@ -2492,11 +2953,51 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Forbidden"
+                      "example": "Forbidden"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Course Id not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Too many requests, please try again later"
                     }
                   }
                 }
@@ -2512,11 +3013,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Server Error"
+                      "example": "Internal server error"
                     }
                   }
                 }
@@ -2561,7 +3062,7 @@
         },
         "responses": {
           "201": {
-            "description": "ok",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
@@ -2569,11 +3070,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "OK"
+                      "example": "OK"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Update chapter success"
+                      "example": "Update chapter success"
                     },
                     "data": {
                       "$ref": "#/components/schemas/Chapter"
@@ -2592,11 +3093,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Client error"
+                      "example": "Client error"
                     }
                   }
                 }
@@ -2624,7 +3125,7 @@
             }
           },
           "403": {
-            "description": "Forbidden Request",
+            "description": "Forbidden",
             "content": {
               "application/json": {
                 "schema": {
@@ -2632,11 +3133,51 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Forbidden"
+                      "example": "Forbidden"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Course Id not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Too many requests, please try again later"
                     }
                   }
                 }
@@ -2652,11 +3193,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Server Error"
+                      "example": "Internal server error"
                     }
                   }
                 }
@@ -2689,7 +3230,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Chpater successfully deleted",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
@@ -2697,11 +3238,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "OK"
+                      "example": "OK"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Delete chapter success"
+                      "example": "Delete chapter success"
                     }
                   }
                 }
@@ -2717,11 +3258,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Client error"
+                      "example": "Client error"
                     }
                   }
                 }
@@ -2749,7 +3290,7 @@
             }
           },
           "403": {
-            "description": "Forbidden Request",
+            "description": "Forbidden",
             "content": {
               "application/json": {
                 "schema": {
@@ -2757,11 +3298,51 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Forbidden"
+                      "example": "Forbidden"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Chapter Id not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Too many requests, please try again later"
                     }
                   }
                 }
@@ -2777,11 +3358,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Server Error"
+                      "example": "Internal server error"
                     }
                   }
                 }
@@ -2794,128 +3375,6 @@
             "bearer_auth": []
           }
         ]
-      }
-    },
-    "/api/modules/{module_id}": {
-      "get": {
-        "tags": [
-          "Module"
-        ],
-        "summary": "Get Module detail",
-        "description": "Get Modules detail",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "module_id",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "uuid"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "ok",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "OK"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Get detail module success"
-                    },
-                    "data": {
-                      "type": "object",
-                      "properties": {
-                        "id": {
-                          "type": "string",
-                          "format": "uuid",
-                          "example": "5ec9d2c2-d8ca-44b2-9691-148ee1abba34"
-                        },
-                        "chapter": {
-                          "type": "object",
-                          "properties": {
-                            "id": {
-                              "type": "string",
-                              "format": "uuid",
-                              "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
-                            },
-                            "name": {
-                              "type": "string",
-                              "example": "Introduction"
-                            }
-                          }
-                        },
-                        "index": {
-                          "type": "number",
-                          "example": 1
-                        },
-                        "name": {
-                          "type": "string",
-                          "example": "programming introduction"
-                        },
-                        "video": {
-                          "type": "string",
-                          "example": "https://www.youtube.com/watch?v=xvFZjo5PgG0"
-                        },
-                        "duration": {
-                          "type": "number",
-                          "example": 10
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Error in client side",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "FAIL"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Client error"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Error in server side",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "FAIL"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Server Error"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
       }
     },
     "/api/admin/modules": {
@@ -2938,7 +3397,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ok",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
@@ -2946,11 +3405,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "OK"
+                      "example": "OK"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Get all modules success"
+                      "example": "Get all modules success"
                     },
                     "data": {
                       "type": "array",
@@ -3000,26 +3459,6 @@
               }
             }
           },
-          "400": {
-            "description": "Error in client side",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "FAIL"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Client error"
-                    }
-                  }
-                }
-              }
-            }
-          },
           "401": {
             "description": "Unauthorized",
             "content": {
@@ -3041,7 +3480,7 @@
             }
           },
           "403": {
-            "description": "Forbidden Request",
+            "description": "Forbidden",
             "content": {
               "application/json": {
                 "schema": {
@@ -3049,11 +3488,51 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Forbidden"
+                      "example": "Forbidden"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Chapter Id not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Too many requests, please try again later"
                     }
                   }
                 }
@@ -3069,11 +3548,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Server Error"
+                      "example": "Internal server error"
                     }
                   }
                 }
@@ -3105,7 +3584,7 @@
         },
         "responses": {
           "201": {
-            "description": "ok",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
@@ -3113,11 +3592,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "OK"
+                      "example": "OK"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Create module success"
+                      "example": "Create module success"
                     },
                     "data": {
                       "$ref": "#/components/schemas/Module"
@@ -3136,11 +3615,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Client error"
+                      "example": "Client error"
                     }
                   }
                 }
@@ -3168,7 +3647,7 @@
             }
           },
           "403": {
-            "description": "Forbidden Request",
+            "description": "Forbidden",
             "content": {
               "application/json": {
                 "schema": {
@@ -3176,11 +3655,51 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Forbidden"
+                      "example": "Forbidden"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Chapter Id not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Too many requests, please try again later"
                     }
                   }
                 }
@@ -3196,11 +3715,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Server Error"
+                      "example": "Internal server error"
                     }
                   }
                 }
@@ -3245,7 +3764,7 @@
         },
         "responses": {
           "201": {
-            "description": "ok",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
@@ -3253,11 +3772,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "OK"
+                      "example": "OK"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Update module success"
+                      "example": "Update module success"
                     },
                     "data": {
                       "$ref": "#/components/schemas/Module"
@@ -3276,11 +3795,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Client error"
+                      "example": "Client error"
                     }
                   }
                 }
@@ -3308,7 +3827,7 @@
             }
           },
           "403": {
-            "description": "Forbidden Request",
+            "description": "Forbidden",
             "content": {
               "application/json": {
                 "schema": {
@@ -3316,11 +3835,51 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Forbidden"
+                      "example": "Forbidden"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Chapter Id not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Too many requests, please try again later"
                     }
                   }
                 }
@@ -3336,11 +3895,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Server Error"
+                      "example": "Internal server error"
                     }
                   }
                 }
@@ -3373,7 +3932,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Module deleting success",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
@@ -3381,31 +3940,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "OK"
+                      "example": "OK"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Delete module success"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Error in client side",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "FAIL"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Client error"
+                      "example": "Delete module success"
                     }
                   }
                 }
@@ -3433,7 +3972,7 @@
             }
           },
           "403": {
-            "description": "Forbidden Request",
+            "description": "Forbidden",
             "content": {
               "application/json": {
                 "schema": {
@@ -3441,11 +3980,51 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Forbidden"
+                      "example": "Forbidden"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Module Id not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Too many requests, please try again later"
                     }
                   }
                 }
@@ -3461,11 +4040,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Server Error"
+                      "example": "Internal server error"
                     }
                   }
                 }
@@ -3505,7 +4084,7 @@
         },
         "responses": {
           "201": {
-            "description": "ok",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
@@ -3513,34 +4092,14 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "OK"
+                      "example": "OK"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Create user tracker data success"
+                      "example": "Create user tracker data success"
                     },
                     "data": {
                       "$ref": "#/components/schemas/User-Tracker"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Error in client side",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "FAIL"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Client error"
                     }
                   }
                 }
@@ -3567,8 +4126,8 @@
               }
             }
           },
-          "403": {
-            "description": "Forbidden Request",
+          "404": {
+            "description": "Not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -3576,11 +4135,31 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Forbidden"
+                      "example": "Course Id not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Too many requests, please try again later"
                     }
                   }
                 }
@@ -3596,11 +4175,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Server Error"
+                      "example": "Internal server error"
                     }
                   }
                 }
@@ -3664,7 +4243,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Get all Course by user id and their progress success",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
@@ -3672,11 +4251,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "OK"
+                      "example": "OK"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Get courses and progress success"
+                      "example": "Get courses and progress success"
                     },
                     "data": {
                       "type": "array",
@@ -3760,11 +4339,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Client error"
+                      "example": "Client error"
                     }
                   }
                 }
@@ -3791,8 +4370,8 @@
               }
             }
           },
-          "403": {
-            "description": "Forbidden Request",
+          "429": {
+            "description": "Too many request",
             "content": {
               "application/json": {
                 "schema": {
@@ -3800,11 +4379,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Forbidden"
+                      "example": "Too many requests, please try again later"
                     }
                   }
                 }
@@ -3820,11 +4399,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Server Error"
+                      "example": "Internal server error"
                     }
                   }
                 }
@@ -3840,12 +4419,12 @@
       }
     },
     "/api/trackers/{course_id}": {
-      "put": {
+      "get": {
         "tags": [
           "User Tracker"
         ],
-        "summary": "Update user tracker",
-        "description": "Update user tracker by their id",
+        "summary": "Get tracker detail",
+        "description": "Get user trackers detail by their id",
         "parameters": [
           {
             "name": "course_id",
@@ -3857,29 +4436,9 @@
             }
           }
         ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "last_opened_chapter": {
-                    "type": "integer",
-                    "example": 1
-                  },
-                  "last_opened_module": {
-                    "type": "integer",
-                    "example": 2
-                  }
-                }
-              }
-            }
-          }
-        },
         "responses": {
-          "201": {
-            "description": "ok",
+          "200": {
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
@@ -3887,11 +4446,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "OK"
+                      "example": "OK"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Update user tracker success"
+                      "example": "Get user tracker detail success"
                     },
                     "data": {
                       "type": "object",
@@ -3933,11 +4492,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Client error"
+                      "example": "Client error"
                     }
                   }
                 }
@@ -3964,8 +4523,8 @@
               }
             }
           },
-          "403": {
-            "description": "Forbidden Request",
+          "404": {
+            "description": "Not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -3973,11 +4532,31 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Forbidden"
+                      "example": "Course Id not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Too many requests, please try again later"
                     }
                   }
                 }
@@ -3993,11 +4572,212 @@
                   "properties": {
                     "status": {
                       "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Internal server error"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearer_auth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "User Tracker"
+        ],
+        "summary": "Update user tracker",
+        "description": "Update user tracker by their id",
+        "parameters": [
+          {
+            "name": "course_id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "last_opened_chapter": {
+                    "type": "integer",
+                    "example": 1
+                  },
+                  "last_opened_module": {
+                    "type": "integer",
+                    "example": 2
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "OK"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Update user tracker success"
+                    },
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "string",
+                          "format": "uuid",
+                          "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+                        },
+                        "last_opened_chapter": {
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "last_opened_module": {
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "total_modules_viewed": {
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "progress_course": {
+                          "type": "integer",
+                          "example": 0
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "datetime",
+                          "example": "2023-11-24T17:07:16.802Z"
+                        },
+                        "updatedAt": {
+                          "type": "string",
+                          "format": "datetime",
+                          "example": "2023-11-24T17:07:16.802Z"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Error in client side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Client error"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
                       "default": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Server Error"
+                      "default": "Unauthorized"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Course Id not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Too many requests, please try again later"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error in server side",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Internal server error"
                     }
                   }
                 }
@@ -4021,7 +4801,7 @@
         "description": "Get user, course, and premium course data counts",
         "responses": {
           "200": {
-            "description": "ok",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
@@ -4029,11 +4809,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "OK"
+                      "example": "OK"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Get total data success"
+                      "example": "Get total data success"
                     },
                     "data": {
                       "type": "object",
@@ -4051,26 +4831,6 @@
                           "example": 420
                         }
                       }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Error in client side",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "FAIL"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Client error"
                     }
                   }
                 }
@@ -4098,7 +4858,7 @@
             }
           },
           "403": {
-            "description": "Forbidden Request",
+            "description": "Forbidden",
             "content": {
               "application/json": {
                 "schema": {
@@ -4106,11 +4866,31 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Forbidden"
+                      "example": "Forbidden"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Too many requests, please try again later"
                     }
                   }
                 }
@@ -4126,11 +4906,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Server Error"
+                      "example": "Internal server error"
                     }
                   }
                 }
@@ -4154,7 +4934,7 @@
         "description": "Get all order by user with jwt",
         "responses": {
           "200": {
-            "description": "Get all order success",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
@@ -4162,11 +4942,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "OK"
+                      "example": "OK"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Get all order success"
+                      "example": "Get all order success"
                     },
                     "data": {
                       "type": "object",
@@ -4239,26 +5019,6 @@
               }
             }
           },
-          "400": {
-            "description": "Error in client side",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "FAIL"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Client error"
-                    }
-                  }
-                }
-              }
-            }
-          },
           "401": {
             "description": "Unauthorized",
             "content": {
@@ -4279,8 +5039,8 @@
               }
             }
           },
-          "403": {
-            "description": "Forbidden Request",
+          "429": {
+            "description": "Too many request",
             "content": {
               "application/json": {
                 "schema": {
@@ -4288,11 +5048,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Forbidden"
+                      "example": "Too many requests, please try again later"
                     }
                   }
                 }
@@ -4308,11 +5068,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Server Error"
+                      "example": "Internal server error"
                     }
                   }
                 }
@@ -4351,7 +5111,7 @@
         },
         "responses": {
           "201": {
-            "description": "Create order success",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
@@ -4359,11 +5119,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "OK"
+                      "example": "OK"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Create order success"
+                      "example": "Create order success"
                     },
                     "data": {
                       "type": "object",
@@ -4424,11 +5184,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Client error"
+                      "example": "Cant order the same course"
                     }
                   }
                 }
@@ -4455,8 +5215,8 @@
               }
             }
           },
-          "403": {
-            "description": "Forbidden Request",
+          "404": {
+            "description": "Not found",
             "content": {
               "application/json": {
                 "schema": {
@@ -4464,11 +5224,31 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Forbidden"
+                      "example": "Course Id not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Too many requests, please try again later"
                     }
                   }
                 }
@@ -4484,11 +5264,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Server Error"
+                      "example": "Internal server error"
                     }
                   }
                 }
@@ -4544,7 +5324,7 @@
         },
         "responses": {
           "201": {
-            "description": "Update order success",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
@@ -4552,11 +5332,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "OK"
+                      "example": "OK"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Update order success"
+                      "example": "Update order success"
                     },
                     "data": {
                       "type": "object",
@@ -4617,11 +5397,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Client error"
+                      "example": "Client error"
                     }
                   }
                 }
@@ -4648,8 +5428,40 @@
               }
             }
           },
-          "403": {
-            "description": "Forbidden Request",
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "course id not found": {
+                    "value": {
+                      "status": "FAIL",
+                      "message": "Course id not found"
+                    }
+                  },
+                  "order id not found": {
+                    "value": {
+                      "status": "FAIL",
+                      "message": "Order id not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many request",
             "content": {
               "application/json": {
                 "schema": {
@@ -4657,11 +5469,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Forbidden"
+                      "example": "Too many requests, please try again later"
                     }
                   }
                 }
@@ -4677,11 +5489,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Server Error"
+                      "example": "Internal server error"
                     }
                   }
                 }
@@ -4702,10 +5514,28 @@
           "Order"
         ],
         "summary": "Get all order",
-        "description": "Get all order from user for admin",
+        "description": "Get all order from user for admin and filter it if there is query params",
+        "parameters": [
+          {
+            "name": "status",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "filter to return with certain order with the same status (SUDAH BAYAR) or (BELUM BAYAR)"
+          },
+          {
+            "name": "method",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "filter to return certain order with the same order method"
+          }
+        ],
         "responses": {
           "200": {
-            "description": "Get all order success",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
@@ -4713,34 +5543,14 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "OK"
+                      "example": "OK"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Get all order success"
+                      "example": "Get all order success"
                     },
                     "data": {
                       "$ref": "#/components/schemas/Order"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Error in client side",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "FAIL"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Client error"
                     }
                   }
                 }
@@ -4768,7 +5578,7 @@
             }
           },
           "403": {
-            "description": "Forbidden Request",
+            "description": "Forbidden",
             "content": {
               "application/json": {
                 "schema": {
@@ -4776,11 +5586,31 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Forbidden"
+                      "example": "Forbidden"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Too many requests, please try again later"
                     }
                   }
                 }
@@ -4796,11 +5626,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Server Error"
+                      "example": "Internal server error"
                     }
                   }
                 }
@@ -4835,7 +5665,7 @@
         ],
         "responses": {
           "200": {
-            "description": "ok",
+            "description": "Success",
             "content": {
               "application/json": {
                 "schema": {
@@ -4843,34 +5673,14 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "OK"
+                      "example": "OK"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Get order by id success"
+                      "example": "Get order by id success"
                     },
                     "data": {
                       "$ref": "#/components/schemas/Order-Details"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Error in client side",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "string",
-                      "default": "FAIL"
-                    },
-                    "message": {
-                      "type": "string",
-                      "default": "Client error"
                     }
                   }
                 }
@@ -4898,7 +5708,7 @@
             }
           },
           "403": {
-            "description": "Forbidden Request",
+            "description": "Forbidden",
             "content": {
               "application/json": {
                 "schema": {
@@ -4906,11 +5716,51 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Forbidden"
+                      "example": "Forbidden"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Order Id not found"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too many request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "FAIL"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "Too many requests, please try again later"
                     }
                   }
                 }
@@ -4926,11 +5776,11 @@
                   "properties": {
                     "status": {
                       "type": "string",
-                      "default": "FAIL"
+                      "example": "FAIL"
                     },
                     "message": {
                       "type": "string",
-                      "default": "Server Error"
+                      "example": "Internal server error"
                     }
                   }
                 }
