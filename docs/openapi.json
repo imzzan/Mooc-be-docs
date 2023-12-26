@@ -4484,6 +4484,10 @@
                           "type": "integer",
                           "example": 0
                         },
+                        "modules_viewed": {
+                          "type": "string",
+                          "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9,80c55a44-e778-4b69-bcf4-bf71b1834bf9"
+                        },
                         "total_modules_viewed": {
                           "type": "integer",
                           "example": 0
@@ -4637,6 +4641,11 @@
                   "last_opened_module": {
                     "type": "integer",
                     "example": 2
+                  },
+                  "module_id": {
+                    "type": "string",
+                    "format": "uuid",
+                    "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9"
                   }
                 }
               }
@@ -4674,6 +4683,10 @@
                         "last_opened_module": {
                           "type": "integer",
                           "example": 0
+                        },
+                        "modules_viewed": {
+                          "type": "string",
+                          "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9,80c55a44-e778-4b69-bcf4-bf71b1834bf9"
                         },
                         "total_modules_viewed": {
                           "type": "integer",
@@ -6760,6 +6773,10 @@
             "type": "integer",
             "example": 0
           },
+          "modules_viewed": {
+            "type": "string",
+            "example": ""
+          },
           "total_modules_viewed": {
             "type": "integer",
             "example": 0
@@ -6795,6 +6812,10 @@
           "last_opened_module": {
             "type": "integer",
             "example": 1
+          },
+          "modules_viewed": {
+            "type": "string",
+            "example": "80c55a44-e778-4b69-bcf4-bf71b1834bf9,80c55a44-e778-4b69-bcf4-bf71b1834bf9"
           },
           "total_modules_viewed": {
             "type": "integer",
