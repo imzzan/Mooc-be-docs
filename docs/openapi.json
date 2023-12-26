@@ -2690,6 +2690,14 @@
               "format": "uuid"
             },
             "description": "Id of course to return certain chapter"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It will return certain chapter with name that contain the keyword"
           }
         ],
         "responses": {
@@ -3393,6 +3401,14 @@
               "format": "uuid"
             },
             "description": "Id of chapter to return certain module"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "description": "It will return certain module with name that contain the keyword"
           }
         ],
         "responses": {
