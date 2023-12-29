@@ -5003,6 +5003,22 @@
                               "type": "string",
                               "example": "Web Development 101"
                             },
+                            "level": {
+                              "type": "string",
+                              "example": "Beginner"
+                            },
+                            "facilitator": {
+                              "type": "string",
+                              "example": "Harris s v"
+                            },
+                            "total_chapter": {
+                              "type": "number",
+                              "example": 10
+                            },
+                            "total_duration": {
+                              "type": "number",
+                              "example": 120
+                            },
                             "category": {
                               "type": "object",
                               "properties": {
